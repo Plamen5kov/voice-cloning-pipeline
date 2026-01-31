@@ -1,0 +1,12 @@
+Quiz 1: Audio Data Basics
+1. What is a spectrogram, and why is it useful in speech synthesis?
+- A spectrogram is a visualisation of the spectrum of frequencies over time usually.
+
+2. Name two common open-source datasets for TTS or voice cloning.
+- LibriTTS - is one of the most commonly used samples for audiobooks which I'm really interested in.
+- LJ Speech - are short recordings of a woman's speech.
+
+Quiz 2: Preprocessing
+Why is audio preprocessing (like resampling and normalization) important before training or inference in machine learning pipelines?
+- Sampling: needs to be the same, because if there are two different sample rates for an audiofile one is 44 kHz and the other is 16kHz the model will have problems because the frequency of one of the files will be either low pitched or running on fast forward.
+- Normalization: if one audiofile is whispering and the other shouting there might be bias because if a single word is found only in the quiet file, there might be bias that that word should sound quiet. The math of the quiet spectrogram will be different and the amplitudes would be different as well (not comparable to one another).
