@@ -1,0 +1,6 @@
+[submodule "02_deep_learning_basics/bark-data-gen"]
+	path = 02_deep_learning_basics/bark-data-gen
+	url = https://github.com/gitmylo/bark-data-gen
+[submodule "02_deep_learning_basics/coqui-tts"]
+	path = 02_deep_learning_basics/coqui-tts
+	url = git@github.com:coqui-ai/TTS.git
