@@ -1,0 +1,7 @@
+
+# Add your dependencies here, one per line
+# Example:
+# numpy
+# pandas
+ebooklib
+beautifulsoup4
