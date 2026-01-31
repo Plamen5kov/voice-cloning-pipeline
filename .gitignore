@@ -66,3 +66,21 @@ ENV/
 **/preprocessed/
 **/processed_voice_samples/
 **/raw_voice_samples/
+
+# Ignore all Python virtual environments and their contents
+**/.venv/
+
+# Ignore compiled libraries and binaries
+*.so
+*.pyc
+*.pyd
+*.pyo
+
+# Ignore certificate and cache files
+*.pem
+
+# Ignore large generated or analysis files
+allfiles.txt
+
+# Ignore EPUBs and other book files
+*.epub
