@@ -1,0 +1,68 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# VS Code
+.vscode/
+
+# Mac and Linux system files
+.DS_Store
+*.swp
+
+# Data and large files
+*.epub
+*.m4a
+*.wav
+*.mp3
+*.zip
+*.tar.gz
+*.tar
+*.7z
+*.rar
+*.bin
+*.h5
+*.pt
+*.ckpt
+*.npy
+*.npz
+*.pkl
+*.pickle
+*.log
+*.tmp
+*.cache
+
+# Data folders
+/data/
+**/preprocessed/
+**/processed_voice_samples/
+**/raw_voice_samples/
