@@ -4,7 +4,7 @@
 This project is a hands-on implementation of a modern voice cloning pipeline using Bark and related open-source tools. It is designed for learning, experimentation, and showcasing your skills in AI voice generation.
 
 ## Project Structure
-- `data/` — Datasets and audio samples
+- `data/` — Datasets and audio samples (not included in the repository; see below for download instructions)
 - `notebooks/` — Jupyter notebooks for exploration and prototyping
 - `scripts/` — Python scripts for training, inference, and utilities
 - `README.md` — Project overview and instructions
@@ -58,6 +58,33 @@ This project is a hands-on implementation of a modern voice cloning pipeline usi
 - Save and reload your fine-tuned model.
 
 ## 7. Data Preparation
+
+### Data Download & Setup
+
+**Note:** The `data/` folder is excluded from git tracking via `.gitignore` to keep the repository fast and lightweight. You must manually download or generate any required datasets or audio samples.
+
+#### Downloading LibriTTS Sample Data
+
+If you want to use the LibriTTS sample dataset:
+
+1. Go to the [LibriTTS official website](https://www.openslr.org/60/) or [Hugging Face LibriTTS page](https://huggingface.co/datasets/lj1995/LibriTTS).
+2. Download the desired subset (e.g., `dev-clean`).
+3. Extract the contents into `data/libritts_sample/LibriTTS/` so your folder structure looks like:
+
+		data/
+			libritts_sample/
+				LibriTTS/
+					dev-clean/
+					...
+
+4. (Optional) If you have your own recordings, place them in a similar structure under `data/`.
+
+**Do not add large datasets or audio files to git!**
+
+---
+
+Continue with the following steps for your own data:
+
 - Record samples of your own voice reading different texts.
 - Trim silence and normalize volume in each recording.
 - Label each audio file with speaker, text, and emotion.
