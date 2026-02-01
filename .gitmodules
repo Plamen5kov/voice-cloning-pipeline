@@ -4,3 +4,6 @@
 [submodule "02_deep_learning_basics/coqui-tts"]
 	path = 02_deep_learning_basics/coqui-tts
 	url = git@github.com:coqui-ai/TTS.git
+[submodule "03_tts_systems/TTS"]
+	path = 03_tts_systems/TTS
+	url = git@github.com:coqui-ai/TTS.git
