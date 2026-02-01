@@ -2,6 +2,7 @@ import torch
 from TTS.api import TTS
 
 def main():
+    # Try CUDA with PyTorch 2.10 + CUDA 13.0
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"Using device: {device}")
     # List available models
