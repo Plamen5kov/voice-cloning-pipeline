@@ -127,9 +127,6 @@ Each module folder contains:
 3. **Code/Scripts** - Hands-on practice materials
 4. **Data folders** - Sample datasets (when applicable)
 
-**Special Resources:**
-- [02_deep_learning_basics/ML_CONCEPTS_EXPLAINED.md](02_deep_learning_basics/ML_CONCEPTS_EXPLAINED.md) - 30KB comprehensive ML concept reference
-
 ---
 
 ## Your Learning Journey
@@ -173,7 +170,7 @@ Learning Path Progress:
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Python 3.8+
+- Python 3.9+
 - PyTorch 2.0+
 - CUDA-capable GPU (optional but recommended)
 - Basic command-line knowledge
