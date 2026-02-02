@@ -57,6 +57,8 @@ voice-cloning-pipeline/
 ├── 11_cloud_platforms/
 ├── 12_project_building/
 └── capstone_voice_replication_pipeline/
+```
+
 **Total Estimated Time**: 100-150 hours + capstone (7 weeks)
 
 ---
@@ -85,7 +87,8 @@ voice-cloning-pipeline/
 
 ## 🗺️ Learning Path Visualization
 
-```
+
+```text
 +---------------------------------------------------------------+
 |                  VOICE CLONING PIPELINE                       |
 |                  (Your Ultimate Goal)                         |
@@ -131,7 +134,7 @@ Each module folder contains:
 
 ## Your Learning Journey
 
-```
+```text
 Learning Path Progress:
     |
     v
