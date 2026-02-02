@@ -2,47 +2,45 @@
 
 Welcome to the foundational module of the voice cloning learning path! This folder contains everything you need to master core deep learning concepts through hands-on PyTorch exercises.
 
-For detailed exercises and tasks, see **[LEARNING_GUIDE.md](LEARNING_GUIDE.md)**.
-
-For comprehensive concept explanations, see **[ML_CONCEPTS_EXPLAINED.md](ML_CONCEPTS_EXPLAINED.md)**.
+**📖 For detailed concept explanations, see [LEARNING_GUIDE.md](LEARNING_GUIDE.md)**  
+**📚 For deep-dive reference on 14 ML concepts, see [ML_CONCEPTS_EXPLAINED.md](ML_CONCEPTS_EXPLAINED.md)**
 
 ---
 
 ## 🚀 Quick Start
 
-1. **Read [LEARNING_GUIDE.md](LEARNING_GUIDE.md)** first (15 min)
-2. **Skim [ML_CONCEPTS_EXPLAINED.md](ML_CONCEPTS_EXPLAINED.md)** (30 min)
-3. **Run scripts in order**: 01 → 02 → 03 → 04 → 05
-4. **Reference ML_CONCEPTS_EXPLAINED.md** when you encounter unfamiliar terms
+1. **Read this README** - Get the big picture (5 min)
+2. **Read [LEARNING_GUIDE.md](LEARNING_GUIDE.md)** - Understand concepts in depth (30 min)
+3. **Skim [ML_CONCEPTS_EXPLAINED.md](ML_CONCEPTS_EXPLAINED.md)** - Reference when needed
+4. **Run scripts in order**: 01 → 02 → 03 → 04 → 05
 
 ---
 
 ## 📂 What's in This Folder
 
 ### 📖 Documentation
-- **README.md** (this file) - Module overview
-- **[LEARNING_GUIDE.md](LEARNING_GUIDE.md)** - Detailed learning path, exercises, and outcomes
-- **[ML_CONCEPTS_EXPLAINED.md](ML_CONCEPTS_EXPLAINED.md)** - Comprehensive reference for 14 core ML concepts
+- **README.md** (this file) - High-level overview
+- **[LEARNING_GUIDE.md](LEARNING_GUIDE.md)** - Detailed explanations and concepts
+- **[ML_CONCEPTS_EXPLAINED.md](ML_CONCEPTS_EXPLAINED.md)** - Comprehensive reference (14 core ML topics)
 
 ### 💻 Code
-- **[dl_utils.py](dl_utils.py)** - Reusable utility functions (GPU detection, data loading, evaluation)
-- **[01_hello_pytorch.py](01_hello_pytorch.py)** - PyTorch basics and tensor operations
-- **[02_load_mnist.py](02_load_mnist.py)** - Data exploration and visualization
-- **[03_train_mnist.py](03_train_mnist.py)** - Training loop ⭐ MOST IMPORTANT
-- **[04_load_model.py](04_load_model.py)** - Model persistence and loading
-- **[05_experiment_architectures.py](05_experiment_architectures.py)** - Architecture comparisons
+- **[dl_utils.py](dl_utils.py)** - Utility functions (GPU, data loading, evaluation)
+- **[01_hello_pytorch.py](01_hello_pytorch.py)** - PyTorch basics
+- **[02_load_mnist.py](02_load_mnist.py)** - Data exploration
+- **[03_train_mnist.py](03_train_mnist.py)** - Training loop ⭐ CORE
+- **[04_load_model.py](04_load_model.py)** - Model persistence
+- **[05_experiment_architectures.py](05_experiment_architectures.py)** - Architecture experiments
 
 ---
 
 ## 🎯 Learning Objectives
 
-By completing this module, you will:
+By completing this module:
 
-- ✅ Understand how neural networks learn (gradients, backpropagation)
-- ✅ Implement training loops from scratch
-- ✅ Evaluate and debug models effectively
-- ✅ Recognize and handle overfitting
-- ✅ Choose appropriate hyperparameters
+- ✅ Understand neural network training (gradients, backpropagation)
+- ✅ Implement and debug training loops
+- ✅ Recognize overfitting, underfitting, and good fit
+- ✅ Choose hyperparameters effectively
 - ✅ Build confidence with PyTorch
 
 ---
@@ -51,38 +49,34 @@ By completing this module, you will:
 
 ### Phase 1: Foundation (Day 1)
 1. Read [LEARNING_GUIDE.md](LEARNING_GUIDE.md)
-2. Skim [ML_CONCEPTS_EXPLAINED.md](ML_CONCEPTS_EXPLAINED.md) - focus on Gradients, Loss Functions, Optimizers
-3. Run `01_hello_pytorch.py`
-4. Run `02_load_mnist.py`
+2. Skim [ML_CONCEPTS_EXPLAINED.md](ML_CONCEPTS_EXPLAINED.md)
+3. Run `01_hello_pytorch.py` and `02_load_mnist.py`
 
 ### Phase 2: Core Training (Day 2)
-1. Deep read ML_CONCEPTS_EXPLAINED.md sections: Gradients, Backpropagation, Learning Rate
-2. Run `03_train_mnist.py` - READ EVERY COMMENT
-3. Read `dl_utils.py` docstrings
-4. Run `04_load_model.py`
+1. Run `03_train_mnist.py` - Study the training loop carefully
+2. Understand training curves (see [LEARNING_GUIDE.md](LEARNING_GUIDE.md#understanding-training-results))
+3. Run `04_load_model.py`
 
 ### Phase 3: Experimentation (Day 3)
 1. Run `05_experiment_architectures.py`
-2. Modify `03_train_mnist.py` - try different learning rates, batch sizes, architectures
-3. Reference ML_CONCEPTS_EXPLAINED.md as needed
+2. Experiment with hyperparameters
+3. Try to improve results
 
-### Phase 4: Mastery
-- Can you achieve >98% accuracy?
-- Can you do it with fewer parameters?
-- Try adding data augmentation
-- Move to next module: [03_tts_systems](../03_tts_systems/)
+**See [LEARNING_GUIDE.md](LEARNING_GUIDE.md) for detailed explanations of each concept**
 
 ---
 
 ## 📊 What Each Script Does
 
-| Script | Purpose | Output | Time |
-|--------|---------|--------|------|
-| 01_hello_pytorch.py | PyTorch basics | Console output | 5 min |
+| Script | Purpose | Key Output | Time |
+|--------|---------|------------|------|
+| 01_hello_pytorch.py | PyTorch basics | Console | 5 min |
 | 02_load_mnist.py | Data exploration | mnist_samples.png | 5 min |
 | 03_train_mnist.py | Training loop ⭐ | mnist_model.pth, training_history.png | 30 sec - 3 min |
-| 04_load_model.py | Model persistence | Console output | 10 sec |
+| 04_load_model.py | Model persistence | Console | 10 sec |
 | 05_experiment_architectures.py | Architecture comparison | architecture_comparison.png | 2-3 min |
+
+**For detailed script explanations, see [LEARNING_GUIDE.md](LEARNING_GUIDE.md#script-details)**
 
 ---
 
@@ -90,28 +84,19 @@ By completing this module, you will:
 
 You've mastered this module when you can:
 
-- [ ] Explain gradients to someone else
-- [ ] Write a training loop from scratch
+- [ ] Explain what gradients are
+- [ ] Write a simple training loop
 - [ ] Diagnose overfitting from plots
-- [ ] Choose appropriate hyperparameters
-- [ ] Explain ReLU vs Tanh
-- [ ] Understand every line in 03_train_mnist.py
+- [ ] Choose hyperparameters
+- [ ] Explain model architecture requirements
 
----
-
-## 🔗 Quick Reference
-
-**Encounter unfamiliar term?** → Look it up in [ML_CONCEPTS_EXPLAINED.md](ML_CONCEPTS_EXPLAINED.md)
-
-**Need context?** → Check [LEARNING_GUIDE.md](LEARNING_GUIDE.md)
-
-**Why this choice?** → Read docstrings in [dl_utils.py](dl_utils.py)
+**Expected Results:** Training ~97-98%, Validation ~95-97%, Gap 1-3%
 
 ---
 
 ## 🚀 Next Steps
 
-After mastering this module:
+After this module:
 - **[03_tts_systems](../03_tts_systems/)** - Apply DL to text-to-speech
 - **[04_speech_audio_processing](../04_speech_audio_processing/)** - Audio analysis
 - **[05_nlp](../05_nlp/)** - Natural language processing
@@ -120,4 +105,5 @@ After mastering this module:
 
 **Time Estimate**: 10-15 hours for complete mastery
 
-**Golden Rule**: Don't just read code. Run it. Modify it. Break it. Fix it. Understand it.
+**Remember**: Concepts in [LEARNING_GUIDE.md](LEARNING_GUIDE.md) are explained in detail. Use it as your main learning resource!
+
