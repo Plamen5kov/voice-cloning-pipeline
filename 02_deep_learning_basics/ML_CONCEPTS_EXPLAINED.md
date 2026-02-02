@@ -5,21 +5,386 @@ A comprehensive guide to understanding the fundamental concepts in machine learn
 ---
 
 ## Table of Contents
-1. [Gradients](#gradients)
-2. [Backpropagation](#backpropagation)
-3. [Loss Functions](#loss-functions)
-4. [Optimizers](#optimizers)
-5. [Activation Functions](#activation-functions)
-6. [Overfitting & Underfitting](#overfitting--underfitting)
-7. [Regularization](#regularization)
-8. [Normalization](#normalization)
-9. [Learning Rate](#learning-rate)
-10. [Epochs, Batches & Iterations](#epochs-batches--iterations)
-11. [Forward & Backward Pass](#forward--backward-pass)
-12. [Model Capacity](#model-capacity)
-13. [Generalization](#generalization)
-14. [Hyperparameters](#hyperparameters)
-15. [Convergence](#convergence)
+1. [Tensors](#tensors)
+2. [Gradients](#gradients)
+3. [Backpropagation](#backpropagation)
+4. [Loss Functions](#loss-functions)
+5. [Optimizers](#optimizers)
+6. [Activation Functions](#activation-functions)
+7. [Overfitting & Underfitting](#overfitting--underfitting)
+8. [Regularization](#regularization)
+9. [Normalization](#normalization)
+10. [Learning Rate](#learning-rate)
+11. [Epochs, Batches & Iterations](#epochs-batches--iterations)
+12. [Forward & Backward Pass](#forward--backward-pass)
+13. [Model Capacity](#model-capacity)
+14. [Generalization](#generalization)
+15. [Hyperparameters](#hyperparameters)
+16. [Convergence](#convergence)
+
+---
+
+## Tensors
+
+### What Are Tensors?
+
+**Definition**: A tensor is a multi-dimensional array - the fundamental data structure in deep learning. Everything in a neural network (data, weights, gradients, outputs) is represented as tensors.
+
+**Simple explanation**: Think of tensors as containers for numbers with different dimensions:
+- **Scalar** (0D): A single number → `3.14`
+- **Vector** (1D): A list → `[1, 2, 3, 4]`
+- **Matrix** (2D): A table → `[[1, 2], [3, 4]]`
+- **3D+**: Higher dimensions for complex data
+
+### Tensor Dimensions (Rank)
+
+```python
+import torch
+
+# 0D Tensor (Scalar)
+scalar = torch.tensor(42)
+print(scalar.shape)  # torch.Size([])
+print(scalar.ndim)   # 0 dimensions
+# Use case: Loss value, accuracy metric
+
+# 1D Tensor (Vector)
+vector = torch.tensor([1, 2, 3, 4, 5])
+print(vector.shape)  # torch.Size([5])
+print(vector.ndim)   # 1 dimension
+# Use case: Single feature vector, bias terms
+
+# 2D Tensor (Matrix)
+matrix = torch.tensor([[1, 2, 3],
+                       [4, 5, 6]])
+print(matrix.shape)  # torch.Size([2, 3])
+print(matrix.ndim)   # 2 dimensions
+# Use case: Single grayscale image, weight matrix
+
+# 3D Tensor
+tensor_3d = torch.randn(10, 28, 28)
+print(tensor_3d.shape)  # torch.Size([10, 28, 28])
+print(tensor_3d.ndim)   # 3 dimensions
+# Use case: Batch of grayscale images (10 images, 28×28 pixels)
+
+# 4D Tensor
+tensor_4d = torch.randn(32, 3, 224, 224)
+print(tensor_4d.shape)  # torch.Size([32, 3, 224, 224])
+print(tensor_4d.ndim)   # 4 dimensions
+# Use case: Batch of RGB images (32 images, 3 channels, 224×224 pixels)
+```
+
+### Deep Learning Tensor Shapes
+
+| Data Type | Typical Shape | Example | Description |
+|-----------|--------------|---------|-------------|
+| **Images (Grayscale)** | `[batch, height, width]` | `[64, 28, 28]` | 64 images, 28×28 pixels |
+| **Images (RGB)** | `[batch, channels, H, W]` | `[32, 3, 224, 224]` | 32 RGB images, 224×224 |
+| **Text (Embeddings)** | `[batch, seq_len, embed_dim]` | `[16, 50, 300]` | 16 sentences, 50 words, 300-dim vectors |
+| **Audio (Waveform)** | `[batch, channels, samples]` | `[8, 1, 16000]` | 8 clips, mono, 1 sec at 16kHz |
+| **Audio (Spectrogram)** | `[batch, freq_bins, time]` | `[4, 128, 100]` | 4 clips, 128 frequencies, 100 frames |
+| **Fully Connected Layer** | `[in_features, out_features]` | `[784, 128]` | 784 inputs → 128 outputs |
+| **Convolutional Filter** | `[out_ch, in_ch, H, W]` | `[64, 3, 3, 3]` | 64 filters, 3 input channels, 3×3 size |
+
+### Why Tensors Instead of NumPy Arrays?
+
+PyTorch tensors look similar to NumPy arrays but have critical advantages:
+
+#### 1. **GPU Acceleration** ⚡
+
+```python
+import numpy as np
+import torch
+import time
+
+# NumPy (CPU only)
+np_array = np.random.randn(5000, 5000)
+start = time.time()
+result_np = np_array @ np_array  # Matrix multiplication
+print(f"NumPy (CPU): {time.time() - start:.3f}s")
+# Output: ~2.5 seconds
+
+# PyTorch (GPU)
+tensor = torch.randn(5000, 5000).cuda()
+start = time.time()
+result_torch = tensor @ tensor  # Same operation
+torch.cuda.synchronize()
+print(f"PyTorch (GPU): {time.time() - start:.3f}s")
+# Output: ~0.03 seconds (80× faster!)
+```
+
+**Speedup for deep learning:**
+- Small models: 10-20× faster
+- Large models: 50-100× faster
+- Without GPUs, training modern models would take weeks instead of hours
+
+#### 2. **Automatic Differentiation** (Autograd)
+
+```python
+# PyTorch tracks operations for gradient computation
+x = torch.tensor([2.0], requires_grad=True)
+y = x ** 3 + 2 * x ** 2 + x + 1
+
+# Compute gradient automatically
+y.backward()
+print(x.grad)  # dy/dx = 3x² + 4x + 1 = 12 + 8 + 1 = 21
+
+# NumPy: You'd have to compute derivatives manually! 😱
+```
+
+**Why this matters:**
+- Neural networks have millions of parameters
+- Manual gradient computation is impossible
+- Autograd makes deep learning practical
+
+#### 3. **Dynamic Computation Graphs**
+
+```python
+# PyTorch builds computational graph on-the-fly
+for i in range(10):
+    x = torch.randn(5, 5, requires_grad=True)
+    y = x.sum()  # Different graph each iteration
+    y.backward()
+```
+
+**Benefit**: Flexible architectures (loops, conditionals, dynamic sizes)
+
+### Common Tensor Operations
+
+#### Creation
+
+```python
+# From Python lists
+torch.tensor([1, 2, 3])
+
+# Zeros and ones
+torch.zeros(3, 4)           # 3×4 matrix of zeros
+torch.ones(2, 3, 5)         # 2×3×5 tensor of ones
+
+# Random tensors
+torch.randn(2, 3)           # Random normal (mean=0, std=1)
+torch.rand(2, 3)            # Random uniform [0, 1)
+
+# Ranges
+torch.arange(0, 10)         # [0, 1, 2, ..., 9]
+torch.linspace(0, 1, 5)     # [0.0, 0.25, 0.5, 0.75, 1.0]
+
+# From NumPy
+import numpy as np
+np_array = np.array([1, 2, 3])
+tensor = torch.from_numpy(np_array)
+```
+
+#### Mathematical Operations
+
+```python
+a = torch.tensor([1, 2, 3])
+b = torch.tensor([4, 5, 6])
+
+# Element-wise operations
+a + b          # [5, 7, 9]
+a * b          # [4, 10, 18]
+a ** 2         # [1, 4, 9]
+
+# Matrix operations
+A = torch.randn(3, 4)
+B = torch.randn(4, 5)
+C = torch.mm(A, B)    # Matrix multiply: (3,4) @ (4,5) = (3,5)
+C = A @ B              # Alternative syntax
+
+# Reductions
+tensor.sum()           # Sum all elements
+tensor.mean()          # Average
+tensor.max()           # Maximum value
+tensor.argmax()        # Index of maximum
+```
+
+#### Reshaping
+
+```python
+x = torch.arange(12)  # [0, 1, 2, ..., 11]
+
+# Reshape
+x.view(3, 4)          # 3×4 matrix
+x.view(2, 2, 3)       # 2×2×3 tensor
+x.reshape(4, 3)       # Alternative (safer)
+
+# Flatten
+x.flatten()           # 1D vector
+x.view(-1)            # Same (-1 infers size)
+
+# Add/remove dimensions
+x.unsqueeze(0)        # Add dimension at position 0
+x.squeeze()           # Remove dimensions of size 1
+
+# Transpose
+A = torch.randn(3, 5)
+A.t()                 # Transpose (5, 3)
+A.transpose(0, 1)     # Same thing
+```
+
+### Device Management (CPU ↔ GPU)
+
+```python
+# Check GPU availability
+print(torch.cuda.is_available())  # True if GPU available
+
+# Create device object
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+print(device)  # cuda or cpu
+
+# Create tensor on specific device
+tensor_cpu = torch.randn(100, 100)              # On CPU
+tensor_gpu = torch.randn(100, 100, device='cuda')  # On GPU directly
+
+# Move tensors between devices
+tensor_cpu = tensor_gpu.to('cpu')   # GPU → CPU
+tensor_gpu = tensor_cpu.to('cuda')  # CPU → GPU
+tensor = tensor.to(device)          # To whichever device
+
+# Important: Tensors must be on same device for operations!
+tensor_a = torch.randn(5, 5).cuda()
+tensor_b = torch.randn(5, 5)  # CPU
+result = tensor_a + tensor_b  # ❌ ERROR: different devices!
+
+tensor_b = tensor_b.cuda()    # Move to GPU
+result = tensor_a + tensor_b  # ✅ Works!
+```
+
+### Gradients and Autograd
+
+```python
+# Enable gradient tracking
+x = torch.tensor([3.0], requires_grad=True)
+
+# Perform operations
+y = x ** 2 + 2 * x + 1  # y = 3² + 2(3) + 1 = 16
+
+# Compute gradients
+y.backward()  # Compute dy/dx
+
+print(x.grad)  # dy/dx = 2x + 2 = 2(3) + 2 = 8
+
+# Gradient accumulation
+x.grad.zero_()  # Clear gradients (they accumulate!)
+y = x ** 3
+y.backward()
+print(x.grad)  # dy/dx = 3x² = 27
+```
+
+### Indexing and Slicing
+
+```python
+tensor = torch.randn(4, 5, 6)
+
+# Like NumPy
+tensor[0]           # First element (5×6 matrix)
+tensor[:, 0]        # First column of all rows
+tensor[..., -1]     # Last element in last dimension
+
+# Boolean indexing
+mask = tensor > 0
+positive = tensor[mask]  # Only positive values
+
+# Advanced indexing
+indices = torch.tensor([0, 2])
+selected = tensor[indices]  # Select rows 0 and 2
+```
+
+### Common Pitfalls
+
+#### 1. **Device Mismatch**
+```python
+model = MyModel().cuda()  # Model on GPU
+data = torch.randn(10, 784)  # Data on CPU
+output = model(data)  # ❌ ERROR!
+
+# Fix:
+data = data.cuda()
+output = model(data)  # ✅
+```
+
+#### 2. **Forgetting to Zero Gradients**
+```python
+for epoch in range(10):
+    output = model(data)
+    loss = criterion(output, target)
+    loss.backward()  # Gradients accumulate!
+    optimizer.step()  # ❌ Uses accumulated gradients
+
+# Fix:
+for epoch in range(10):
+    optimizer.zero_grad()  # Clear old gradients ✅
+    output = model(data)
+    loss = criterion(output, target)
+    loss.backward()
+    optimizer.step()
+```
+
+#### 3. **In-place Operations Breaking Autograd**
+```python
+x = torch.tensor([1.0], requires_grad=True)
+y = x ** 2
+x += 1  # ❌ In-place modification breaks gradient computation
+y.backward()  # Error!
+
+# Fix:
+x = torch.tensor([1.0], requires_grad=True)
+y = x ** 2
+x = x + 1  # ✅ Creates new tensor
+```
+
+### Practical Example: MNIST Forward Pass
+
+```python
+# Input: Batch of 64 MNIST images
+images = torch.randn(64, 1, 28, 28)  # [batch, channels, H, W]
+
+# Flatten for fully-connected layer
+images_flat = images.view(64, -1)  # [64, 784]
+print(images_flat.shape)  # torch.Size([64, 784])
+
+# Layer 1: 784 → 128
+weight1 = torch.randn(784, 128)
+bias1 = torch.randn(128)
+out1 = images_flat @ weight1 + bias1  # [64, 128]
+out1 = torch.relu(out1)
+
+# Layer 2: 128 → 10
+weight2 = torch.randn(128, 10)
+bias2 = torch.randn(10)
+out2 = out1 @ weight2 + bias2  # [64, 10]
+
+# Final output: [64, 10] = 64 images, 10 class scores each
+print(out2.shape)  # torch.Size([64, 10])
+```
+
+### Memory Considerations
+
+```python
+# Check tensor memory usage
+tensor = torch.randn(1000, 1000)
+print(tensor.element_size())  # Bytes per element (4 for float32)
+print(tensor.nelement())      # Total elements (1,000,000)
+print(f"Memory: {tensor.element_size() * tensor.nelement() / 1024**2:.2f} MB")
+# Output: Memory: 3.81 MB
+
+# GPU memory
+if torch.cuda.is_available():
+    print(f"GPU memory allocated: {torch.cuda.memory_allocated() / 1024**2:.2f} MB")
+    print(f"GPU memory cached: {torch.cuda.memory_reserved() / 1024**2:.2f} MB")
+```
+
+### Key Takeaways
+
+✅ **Tensors are multi-dimensional arrays** - the core data structure in deep learning  
+✅ **Everything is a tensor** - inputs, weights, gradients, outputs  
+✅ **GPU acceleration** - 10-100× faster than CPU for large operations  
+✅ **Automatic differentiation** - `.backward()` computes gradients automatically  
+✅ **Device management matters** - Keep tensors on the same device (CPU or GPU)  
+✅ **Shape awareness** - Always know your tensor dimensions  
+✅ **Gradients accumulate** - Remember to `.zero_grad()` before each backward pass
+
+**Bottom line**: Master tensors, master deep learning. Every operation in a neural network is tensor manipulation!
 
 ---
 

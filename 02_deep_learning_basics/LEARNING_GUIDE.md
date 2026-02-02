@@ -34,9 +34,19 @@ Each script below includes in-depth explanations of concepts, outputs, and what 
 - Why PyTorch for deep learning
 
 **Key Concepts:**
-- **Tensors** - Multi-dimensional arrays (like NumPy but GPU-capable)
-- **Device management** - CPU vs GPU execution
-- **PyTorch syntax** - Foundation for all deep learning code
+
+- **Tensors** - Multi-dimensional arrays (PyTorch's core data structure)
+  - See [Tensors](ML_CONCEPTS_EXPLAINED.md#tensors) for complete explanation
+  - **Why they're used here:** Every operation in PyTorch uses tensors - this script teaches you basic tensor creation, manipulation, and device management (CPU vs GPU) before you need them for neural networks
+
+- **Device Management** - Running computations on CPU vs GPU
+  - GPU acceleration = 10-100× faster for deep learning
+  - Critical for training large models efficiently
+
+- **Basic Operations** - Creating, reshaping, and computing with tensors
+  - Foundation for understanding how data flows through neural networks
+
+---
 
 **Run it:**
 ```bash
@@ -45,7 +55,7 @@ python 01_hello_pytorch.py
 
 **Expected Output:** Console output showing tensor operations and GPU detection
 
-**Time:** 5 minutes
+**Time:** 10 minutes
 
 **What Makes This Important:**
 Understanding tensors is fundamental - they're the data structure for everything in deep learning. This script ensures you're comfortable with PyTorch before diving into neural networks.
@@ -110,17 +120,12 @@ Input (784 pixels) → [128 neurons + ReLU] → Output (10 classes)
    - (CNNs preserve spatial structure better)
 
 2. **Hidden size = 128 neurons**
-   - The "capacity" of the hidden layer
-   - More neurons = more patterns to learn
-   - But too many = overfitting and slower training
-   - 128 is reasonable for MNIST complexity
+   - See [Model Capacity](ML_CONCEPTS_EXPLAINED.md#model-capacity) for complete explanation
+   - **Why 128:** Balanced capacity for MNIST - enough to learn patterns without overfitting
 
 3. **ReLU activation**
-   - f(x) = max(0, x)
-   - Introduces non-linearity (crucial!)
-   - Without activation, network is just linear regression
-   - ReLU is fast, doesn't saturate, works well in practice
-   - Alternatives: Tanh (slower), Sigmoid (vanishing gradients)
+   - See [Activation Functions](ML_CONCEPTS_EXPLAINED.md#activation-functions) for complete explanation
+   - **Why it's used here:** Introduces non-linearity (without it, the network is just linear regression). ReLU is fast, doesn't saturate, and works well in practice
 
 4. **Output size = 10**
    - One for each digit (0-9)
@@ -131,11 +136,14 @@ Input (784 pixels) → [128 neurons + ReLU] → Output (10 classes)
 
 #### Hyperparameters
 
-- **Batch size = 64**: Balances GPU memory and gradient stability
-- **Learning rate = 0.001**: Step size for weight updates
-- **Epochs = 10**: Number of complete passes through data
-- **Optimizer = Adam**: Adaptive learning rates (better than SGD)
-- **Loss = CrossEntropyLoss**: Standard for classification
+See [Hyperparameters](ML_CONCEPTS_EXPLAINED.md#hyperparameters), [Learning Rate](ML_CONCEPTS_EXPLAINED.md#learning-rate), [Epochs & Batches](ML_CONCEPTS_EXPLAINED.md#epochs-batches--iterations), and [Optimizers](ML_CONCEPTS_EXPLAINED.md#optimizers) for complete explanations.
+
+**Why these values:**
+- **Batch size = 64**: Balances GPU memory efficiency with gradient stability
+- **Learning rate = 0.001**: Adam's default - good starting point for most problems
+- **Epochs = 10**: Enough for MNIST to converge without overfitting
+- **Optimizer = Adam**: Adaptive learning rates work better than SGD for this problem
+- **Loss = CrossEntropyLoss**: Standard for multi-class classification
 
 #### The Training Loop - The Heart of Deep Learning
 
@@ -149,33 +157,21 @@ The `train_epoch()` function shows the **core algorithm**:
 5. optimizer.step()            # Update weights
 ```
 
-**Detailed explanation:**
+**Why each step matters:**
 
-1. **`optimizer.zero_grad()`**
-   - Gradients accumulate by default in PyTorch
-   - Must reset to zero before each batch
-   - Forgetting this causes incorrect gradient calculations
+1. **`optimizer.zero_grad()`** - Gradients accumulate by default; must reset before each batch or you'll get incorrect updates
 
-2. **Forward pass** - `output = model(data)`
-   - Input flows through layers
-   - Each layer applies: output = activation(weights × input + bias)
-   - Network makes predictions based on current weights
+2. **Forward pass** `output = model(data)` - See [Forward Pass](ML_CONCEPTS_EXPLAINED.md#forward--backward-pass)
+   - Input flows through layers to make predictions
 
-3. **Compute loss** - `loss = criterion(output, target)`
-   - Measures how wrong the predictions are
-   - CrossEntropyLoss for classification
-   - Lower loss = better predictions
+3. **Compute loss** `loss = criterion(output, target)` - See [Loss Functions](ML_CONCEPTS_EXPLAINED.md#loss-functions)
+   - Measures how wrong predictions are; lower = better
 
-4. **`loss.backward()`** - BACKPROPAGATION
-   - **This is the magic!**
-   - Computes gradients using chain rule
-   - Tells us how to change each weight to reduce loss
-   - See [ML_CONCEPTS_EXPLAINED.md](ML_CONCEPTS_EXPLAINED.md#backpropagation) for details
+4. **`loss.backward()`** - BACKPROPAGATION - See [Backpropagation](ML_CONCEPTS_EXPLAINED.md#backpropagation) and [Gradients](ML_CONCEPTS_EXPLAINED.md#gradients)
+   - **This is the magic!** Computes how to change each weight to reduce loss using the chain rule
 
-5. **`optimizer.step()`**
-   - Updates weights: weight = weight - learning_rate × gradient
-   - Moves weights in direction that reduces loss
-   - Adam optimizer uses adaptive learning rates
+5. **`optimizer.step()`** - See [Optimizers](ML_CONCEPTS_EXPLAINED.md#optimizers)
+   - Updates weights in the direction that reduces loss
 
 **This 5-step loop is ALL of deep learning!** Everything else is details.
 
@@ -214,13 +210,15 @@ After running this script, you get **training_history.png**. Here's how to inter
 
 ##### Diagnosing Your Model
 
-| You See | Diagnosis | What It Means | Fix |
-|---------|-----------|---------------|-----|
-| Both lines high (>90%), small gap (2-4%) | **Good Fit** ✅ | Model learned patterns, generalizes well | You're done! Ship it 🚀 |
-| Training high (>95%), Validation low (<70%) | **Overfitting** ⚠️ | Model memorized training data | Add dropout, reduce complexity, more data |
-| Both lines low (<80%), small gap | **Underfitting** 📉 | Model too simple to learn | Add layers/neurons, train longer |
-| Validation drops while training rises | **Severe Overfitting** 🚨 | Model is memorizing, not learning | Stop training, add regularization |
-| Wild oscillations | Learning rate too high | Steps are too large | Lower learning rate |
+See [Overfitting & Underfitting](ML_CONCEPTS_EXPLAINED.md#overfitting--underfitting) and [Regularization](ML_CONCEPTS_EXPLAINED.md#regularization) for complete explanations.
+
+| You See | Diagnosis | What to Do |
+|---------|-----------|------------|
+| Both lines high (>90%), small gap (2-4%) | **Good Fit** ✅ | You're done! Ship it 🚀 |
+| Training high (>95%), Validation low (<70%) | **Overfitting** ⚠️ | Add dropout, reduce complexity, get more data |
+| Both lines low (<80%), small gap | **Underfitting** 📉 | Add layers/neurons, train longer |
+| Validation drops while training rises | **Severe Overfitting** 🚨 | Stop training, add regularization |
+| Wild oscillations | Learning rate too high | Lower learning rate (see [Learning Rate](ML_CONCEPTS_EXPLAINED.md#learning-rate)) |
 
 ##### Visual Examples
 
@@ -254,9 +252,9 @@ Gap: 5% but both LOW ❌ Model too simple
 **Expected Results for MNIST:**
 - Training: ~97-98%
 - Validation: ~95-97%
-- **Final gap: 1-3%** (the difference at the last epoch when both curves plateau)
+- **Final gap: 1-3%** (see [Convergence](ML_CONCEPTS_EXPLAINED.md#convergence))
 
-**Note:** The gap changes during training - it's normal to see larger gaps early on. What matters is the **final gap** when training completes. A final gap of 1-3% means healthy generalization!
+**Note:** The gap changes during training - it's normal to see larger gaps early on. What matters is the **final gap** when both curves plateau (convergence). A gap of 1-3% means healthy generalization!
 
 ##### The Goldilocks Principle
 
@@ -535,13 +533,13 @@ Try modifying the script to test:
 #### `load_mnist_data()`
 - Loads MNIST with proper normalization
 - Sets up DataLoaders with batching
-- **Why normalization:** Pixel values 0-255 → ~[-1, 1] for faster convergence
-- **Why batching:** Process multiple samples together for efficiency
+- **Why normalization:** See [Normalization](ML_CONCEPTS_EXPLAINED.md#normalization) - transforms pixel values for faster convergence
+- **Why batching:** See [Batches](ML_CONCEPTS_EXPLAINED.md#epochs-batches--iterations) - GPU efficiency and stable gradients
 
 #### `evaluate_model()`
 - Calculates accuracy on test/validation set
-- Uses `model.eval()` mode (disables dropout)
-- **Why separate evaluation:** Ensures model generalizes, not just memorizes
+- Uses `model.eval()` mode (disables dropout/batchnorm)
+- **Why separate evaluation:** See [Generalization](ML_CONCEPTS_EXPLAINED.md#generalization) - tests if model learned patterns, not just memorized
 
 #### `count_parameters()`
 - Counts trainable parameters in model
