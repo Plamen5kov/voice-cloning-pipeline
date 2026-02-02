@@ -86,31 +86,31 @@ voice-cloning-pipeline/
 ## 🗺️ Learning Path Visualization
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                    VOICE CLONING PIPELINE                        │
-│                   (Your Ultimate Goal)                           │
-└─────────────────────────────────────────────────────────────────┘
-                              ▲
-                              │
-            ┌─────────────────┴─────────────────┐
-            │                                   │
-    ┌───────────────┐                   ┌──────────────┐
-    │ TTS SYSTEMS   │                   │   NLP & ML   │
-    │ (Modules 3-9) │                   │ (Modules 5-9)│
-    └───────────────┘                   └──────────────┘
-            │                                   │
-            └─────────────────┬─────────────────┘
-                              │
-                    ┌─────────▼─────────┐
-                    │ DEEP LEARNING     │
-                    │    BASICS         │
-                    │ (Module 02) ← START HERE
-                    └───────────────────┘
-                              │
-                    ┌─────────▼─────────┐
-                    │ PYTHON & ENV      │
-                    │ (Modules 00-01)   │
-                    └───────────────────┘
++---------------------------------------------------------------+
+|                  VOICE CLONING PIPELINE                       |
+|                  (Your Ultimate Goal)                         |
++---------------------------------------------------------------+
+                            ^
+                            |
+          +-----------------+-----------------+
+          |                                   |
+    +-------------+                   +--------------+
+    | TTS SYSTEMS |                   |  NLP & ML    |
+    | (Mod 3-9)   |                   |  (Mod 5-9)   |
+    +-------------+                   +--------------+
+          |                                   |
+          +-----------------+-----------------+
+                            |
+                    +---------------+
+                    | DEEP LEARNING |
+                    |    BASICS     |
+                    | (Module 02)   | <-- START HERE
+                    +---------------+
+                            |
+                    +---------------+
+                    | PYTHON & ENV  |
+                    | (Modules 0-1) |
+                    +---------------+
 ```
 
 ---
@@ -129,14 +129,15 @@ Each module folder contains:
 
 ---
 
-## �️ Your Journey
+## Your Learning Journey
 
 ```
 Learning Path Progress:
-    ↓
-[✓] 00_env_setup
-[✓] 01_python_programming  
-[→] 02_deep_learning_basics ← Foundational module
+    |
+    v
+[x] 00_env_setup
+[x] 01_python_programming  
+[>] 02_deep_learning_basics <-- Foundational module (START HERE)
 [ ] 03_tts_systems
 [ ] 04_speech_audio_processing
 [ ] 05_nlp
