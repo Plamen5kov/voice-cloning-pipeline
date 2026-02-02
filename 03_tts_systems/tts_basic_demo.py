@@ -1,17 +1,18 @@
-import torch
-from TTS.api import TTS
+from tts_utils import get_device, load_tts_model
 
 def main():
-    device = "cuda" if torch.cuda.is_available() else "cpu"
-    print(f"Using device: {device}")
-    # List available models
-    print("Available models:")
-    print(TTS().list_models())
-    # Init a basic English TTS model
-    tts = TTS(model_name="tts_models/en/ljspeech/glow-tts").to(device)
-    # Synthesize speech
-    tts.tts_to_file(text="Hello, this is a basic Coqui TTS demo.", file_path="output_basic_demo.wav")
-    print("Audio saved to output_basic_demo.wav")
+    # Get device and load model
+    device = get_device()
+    tts = load_tts_model(model_name="tts_models/en/ljspeech/glow-tts", device=device)
+    
+    # Synthesize speech (basic model doesn't support speaker parameter)
+    text = "Hello, this is a basic Coqui TTS demo."
+    output_file = "output_basic_demo.wav"
+    
+    print(f"Generating speech...")
+    tts.tts_to_file(text=text, file_path=output_file)
+    print(f"✓ Audio saved to {output_file}")
 
 if __name__ == "__main__":
     main()
+
