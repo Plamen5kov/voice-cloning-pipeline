@@ -62,7 +62,7 @@ ENV/
 *.cache
 
 # Data folders
-/data/
+**/data/
 **/preprocessed/
 **/processed_voice_samples/
 **/raw_voice_samples/
