@@ -1,0 +1,23 @@
+# Ignore audio data files
+data/
+
+# Ignore temporary download directories
+temp/
+temp_music/
+
+# Ignore downloaded archives
+*.tar.gz
+*.zip
+*.au
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
