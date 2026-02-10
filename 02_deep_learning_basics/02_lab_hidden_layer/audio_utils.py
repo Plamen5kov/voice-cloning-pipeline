@@ -22,9 +22,20 @@ def load_audio_file(filepath, sr=22050, n_mels=128, duration=3.0):
         mel_spectrogram: Normalized mel-spectrogram of shape (n_mels, time_steps)
     """
     # Load audio
-    audio, _ = librosa.load(filepath, sr=sr, duration=duration)
+    audio, _ = librosa.load(filepath, sr=sr, duration=None)
     
-    # Compute mel-spectrogram
+    # Ensure exact length by padding or trimming
+    target_length = int(duration * sr)
+    if len(audio) > target_length:
+        # Trim from center
+        start = (len(audio) - target_length) // 2
+        audio = audio[start:start + target_length]
+    elif len(audio) < target_length:
+        # Pad with zeros
+        padding = target_length - len(audio)
+        audio = np.pad(audio, (0, padding), mode='constant')
+    
+    # Compute mel-spectrogram with fixed parameters
     mel_spec = librosa.feature.melspectrogram(
         y=audio,
         sr=sr,

@@ -28,20 +28,56 @@ You'll build a binary classifier that can distinguish between male and female vo
 pip install numpy matplotlib librosa soundfile ipython
 ```
 
-### 2. Download Audio Samples
+### 2. Download and Prepare Audio Samples
 
-Run the download script to prepare the dataset:
+**Option A: Automated Setup (Easiest)**
+
+Run the automated setup script:
+
+```bash
+python setup_lab2_data.py
+```
+
+This runs the complete pipeline automatically and verifies the setup.
+
+**Option B: Quick Setup (Manual but simple)**
+
+Run the all-in-one download script:
 
 ```bash
 python download_samples.py
 ```
 
-This will:
+This will automatically:
 - Download LibriSpeech dev-clean subset (~350MB)
 - Extract 120 training + 40 test samples for each class  
 - Save audio clips in `data/train/` and `data/test/`
 
 **Note**: The download may take several minutes depending on your internet connection.
+
+**Option C: Full Pipeline (Step-by-step control)**
+
+For better control and reusability across labs:
+
+```bash
+# Step 1: Download LibriSpeech (if not already downloaded)
+python download_samples.py  # Or download manually to data/LibriSpeech/
+
+# Step 2: Organize by gender (creates male_samples/, female_samples/)
+python sort_dev_clean_by_gender.py
+
+# Step 3: Convert FLAC to WAV (creates male_samples_wav/, female_samples_wav/)
+python convert_flac_to_wav.py
+
+# Step 4: Create train/test split (120 train + 40 test per gender)
+python prepare_lab2_dataset.py
+```
+
+This pipeline:
+- Organizes all LibriSpeech samples by gender (20 speakers each, ~2,700 total files)
+- Converts to WAV format (22.05 kHz)
+- Creates a balanced 240 train + 80 test dataset
+- Intermediate files can be reused by other labs (Lab 4 uses the full dataset)
 
 ### 3. Verify Setup
 
@@ -69,6 +105,28 @@ jupyter notebook audio_classification_nn.ipynb
 
 Or open it in VS Code with the Jupyter extension.
 
+## Data Workflow
+
+**Automated Setup (setup_lab2_data.py):**
+- Runs the complete pipeline automatically in one command
+- Verifies each step and provides clear progress updates
+- Recommended for first-time users
+
+**Quick Setup (download_samples.py):**
+- All-in-one script that downloads, processes, and creates the 240 train + 80 test dataset directly
+- Good for quick starts when you don't need the full organized dataset
+
+**Full Pipeline (step-by-step):**
+
+1. **Download**: Fetches LibriSpeech dev-clean (~350MB) → `data/LibriSpeech/`
+2. **Organize by Gender** (`sort_dev_clean_by_gender.py`): Separates speakers by gender → `male_samples/`, `female_samples/` (FLAC files, ~2,700 files)
+3. **Convert Format** (`convert_flac_to_wav.py`): FLAC → WAV (22.05kHz) → `male_samples_wav/`, `female_samples_wav/`
+4. **Create Dataset Split** (`prepare_lab2_dataset.py`): 
+   - Randomly selects 120 train + 40 test samples per gender
+   - Saves to `data/train/male/`, `data/train/female/`, `data/test/male/`, `data/test/female/`
+
+**The notebook uses only `data/train/` and `data/test/` directories.** The intermediate directories (male_samples, female_samples, etc.) contain the full organized LibriSpeech dataset (~2,700 samples) and can be reused by other labs - Lab 4 uses this full dataset for training.
+
 ## Lab Structure
 
 The lab consists of **9 exercises**:
@@ -85,14 +143,36 @@ The lab consists of **9 exercises**:
 
 ## Files in This Lab
 
+### Core Lab Files
 - `audio_classification_nn.ipynb` - Main notebook with exercises
-- `download_samples.py` - Dataset preparation script
 - `audio_utils.py` - Audio loading and preprocessing utilities
 - `public_tests.py` - Automated test functions
 - `testCases_v2.py` - Test case generators
 - `test_setup.py` - Setup verification script
 - `clean_notebook.py` - Removes outputs and solutions (for instructors)
 - `README.md` - This file
+
+### Data Preparation
+- `setup_lab2_data.py` - Automated setup script (runs entire pipeline)
+- `download_samples.py` - Downloads and prepares dataset from LibriSpeech (all-in-one, quick setup)
+- `sort_dev_clean_by_gender.py` - Organizes LibriSpeech by speaker gender (20 male + 20 female speakers)
+- `convert_flac_to_wav.py` - Converts FLAC files to WAV format (22.05kHz)
+- `prepare_lab2_dataset.py` - Creates train/test split (120 train + 40 test per gender)
+
+### Data Directories
+- `data/train/` - Training samples (120 male + 120 female WAV files)
+- `data/test/` - Test samples (40 male + 40 female WAV files)
+- `data/LibriSpeech/` - Original LibriSpeech dev-clean subset (downloaded, can be deleted after setup)
+
+### Intermediate Processing Directories (Created during data preparation)
+- `male_samples/` - Organized male speaker FLAC files (1,329 files from 20 speakers)
+- `female_samples/` - Organized female speaker FLAC files (1,374 files from 20 speakers)
+- `male_samples_wav/` - Converted male WAV files (1,329 files)
+- `female_samples_wav/` - Converted female WAV files (1,374 files)
+- `male_speaker_ids.json` - Male speaker metadata
+- `female_speaker_ids.json` - Female speaker metadata
+
+**Note**: The intermediate directories contain the full organized LibriSpeech samples. The `data/` directory contains the final train/test split used by the notebook.
 
 ## Expected Results
 

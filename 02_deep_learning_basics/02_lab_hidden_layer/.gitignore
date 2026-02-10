@@ -1,7 +1,11 @@
+# Organized LibriSpeech samples by gender
 female_samples/
+female_samples_wav/
 female_speaker_ids.json
 male_samples/
+male_samples_wav/
 male_speaker_ids.json
+
 # Ignore audio data files
 data/
 

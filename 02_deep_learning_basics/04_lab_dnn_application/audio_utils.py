@@ -22,13 +22,19 @@ def load_and_process_audio(audio_path, sr=22050, duration=3, n_mels=128):
     Returns:
     mel_spec -- mel-spectrogram as numpy array
     """
-    # Load audio file
-    y, sr = librosa.load(audio_path, sr=sr, duration=duration)
+    # Load audio file (load full file, we'll handle duration ourselves)
+    y, sr = librosa.load(audio_path, sr=sr, duration=None)
     
-    # Pad if shorter than duration
-    target_length = sr * duration
-    if len(y) < target_length:
-        y = np.pad(y, (0, target_length - len(y)), mode='constant')
+    # Ensure exact duration by padding or trimming
+    target_length = int(duration * sr)
+    if len(y) > target_length:
+        # Trim from center if too long
+        start = (len(y) - target_length) // 2
+        y = y[start:start + target_length]
+    elif len(y) < target_length:
+        # Pad with zeros if too short
+        padding = target_length - len(y)
+        y = np.pad(y, (0, padding), mode='constant')
     
     # Compute mel-spectrogram
     mel_spec = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=n_mels)
