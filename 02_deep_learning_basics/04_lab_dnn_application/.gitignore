@@ -1,0 +1,62 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints
+
+# Data files
+*.h5
+*.hdf5
+data/*.h5
+data/*.hdf5
+
+# Audio files
+*.wav
+*.mp3
+*.flac
+*.ogg
+*.m4a
+
+# Dataset directories
+data/
+LibriSpeech/
+male_samples/
+female_samples/
+male_samples_wav/
+female_samples_wav/
+
+# Downloaded archives
+*.tar.gz
+*.zip
+
+# Speaker metadata
+male_speaker_ids.json
+female_speaker_ids.json
+
+# Visualizations
+visualizations/*.png
+visualizations/*.jpg
+visualizations/*.pdf
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
