@@ -1,0 +1,19 @@
+# Ignore the dataset HDF5 files (they're large and should be downloaded separately)
+*.h5
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Model files (if any are saved)
+*.pkl
+*.pth
+saved_models/
+
+# OS files
+.DS_Store
+Thumbs.db

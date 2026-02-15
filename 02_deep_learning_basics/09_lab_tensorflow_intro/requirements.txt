@@ -1,0 +1,22 @@
+# TensorFlow Introduction Lab Requirements
+
+# Core deep learning framework
+# Note: Using TensorFlow 2.16+ (older versions no longer available in pip)
+# The lab code is compatible with TensorFlow 2.x
+tensorflow>=2.16.0
+
+# Numerical computing
+numpy>=1.19.0
+
+# Data handling
+h5py>=2.10.0
+
+# Visualization
+matplotlib>=3.3.0
+
+# Jupyter notebook support
+jupyter>=1.0.0
+ipykernel>=5.3.0
+
+# Note: tensorflow-gpu is no longer a separate package in TensorFlow 2.x
+# GPU support is included automatically if you have CUDA installed
