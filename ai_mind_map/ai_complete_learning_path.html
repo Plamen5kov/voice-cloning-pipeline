@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Complete AI Learning Path</title>
+  <title>AI Learning Path - Option 2: Foundation Flow</title>
   <style>
     * {
       margin: 0;
@@ -288,8 +288,8 @@
 <body>
   <div class="title" id="titleBox">
     <button class="close-btn" onclick="closeTitleBox()">×</button>
-    <h1>🤖 Complete AI Learning Path</h1>
-    <p>Your comprehensive roadmap to mastering Artificial Intelligence - from foundations to advanced topics. Click any node to explore.</p>
+    <h1>🤖 AI Learning Path - Option 2</h1>
+    <p>Foundation Flow - Shows essential prerequisite chains (Math → ML → DL → Applications). Cleaner than full connections, keeps learning progression visible.</p>
   </div>
   
   <div class="legend collapsed" id="legend">
@@ -1061,24 +1061,12 @@
         { source: 10, target: 58 },
         { source: 10, target: 59 },
         
-        // Cross-domain connections (dependencies)
-        { source: 1, target: 2 },   // Math -> ML
-        { source: 1, target: 3 },   // Math -> DL
-        { source: 2, target: 3 },   // ML -> DL
-        { source: 3, target: 4 },   // DL -> CV
-        { source: 3, target: 5 },   // DL -> NLP
-        { source: 3, target: 6 },   // DL -> RL
-        { source: 2, target: 8 },   // ML -> Data Eng
-        { source: 7, target: 3 },   // Tools -> DL
-        { source: 8, target: 2 },   // Data Eng -> ML
-        { source: 10, target: 0 },  // Ethics -> Core (important!)
-        { source: 23, target: 5 },  // Transformers -> NLP
-        { source: 21, target: 4 },  // CNNs -> CV
-        { source: 23, target: 33 }, // Transformers -> Language Models
-        { source: 41, target: 20 }, // PyTorch -> Neural Networks
-        { source: 20, target: 15 }, // Neural Networks -> Supervised Learning
-        { source: 12, target: 25 }, // Calculus -> Optimization
-        { source: 40, target: 33 }, // RLHF -> Language Models
+        // Essential prerequisite connections only (Foundation Flow)
+        { source: 1, target: 2 },   // Math → ML (math is foundation for ML)
+        { source: 2, target: 3 },   // ML → DL (DL builds on ML concepts)
+        { source: 3, target: 4 },   // DL → CV (DL enables modern CV)
+        { source: 3, target: 5 },   // DL → NLP (DL enables modern NLP)
+        { source: 3, target: 6 }    // DL → RL (DL enables modern RL)
       ]
     };
 

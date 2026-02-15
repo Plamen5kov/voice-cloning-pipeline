@@ -1,1 +1,0 @@
-If you make a racket there, Pong will dump a pot of boiling water over you.

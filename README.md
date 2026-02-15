@@ -4,100 +4,71 @@ A hands-on learning path for building a modern voice cloning pipeline using deep
 
 ---
 
-## 📚 Overview of Learning Materials
+## �️ Interactive Learning Visualization
 
-This repository contains a **structured learning path** with 13 modules covering everything from Python basics to deploying production ML systems. Each module has its own **LEARNING_GUIDE.md** with detailed exercises and objectives.
+**[Explore the AI Learning Path Graph](ai_mind_map/ai_complete_learning_path.html)** - Interactive D3.js visualization showing:
+- 10 major AI learning domains
+- 60 specific topics and techniques
+- Your current learning progress (✅ completed / 📋 planned)
+- Foundational relationships and prerequisites
+- Direct links to relevant folders and resources
 
-### 📖 Module Learning Guides
-
-Each folder contains a comprehensive learning guide. Follow them sequentially or jump to areas of interest:
-
-| Module | Focus Area | Learning Guide | Time Estimate |
-|--------|------------|----------------|---------------|
-| **00** | Environment Setup | [LEARNING_GUIDE](00_env_setup/LEARNING_GUIDE.md) | 1-2 hours |
-| **01** | Python Programming | [LEARNING_GUIDE](01_python_programming/LEARNING_GUIDE.md) | 4-6 hours |
-| **02** | Deep Learning Basics | [LEARNING_GUIDE](02_deep_learning_basics/LEARNING_GUIDE.md) ⭐ | 10-15 hours |
-| **03** | TTS Systems | [LEARNING_GUIDE](03_tts_systems/LEARNING_GUIDE.md) | 6-8 hours |
-| **04** | Speech/Audio Processing | [LEARNING_GUIDE](04_speech_audio_processing/LEARNING_GUIDE.md) | 5-7 hours |
-| **05** | NLP | [LEARNING_GUIDE](05_nlp/LEARNING_GUIDE.md) | 6-8 hours |
-| **06** | Hugging Face Transformers | [LEARNING_GUIDE](06_hf_transformers/LEARNING_GUIDE.md) | 8-12 hours |
-| **07** | Data Preparation | [LEARNING_GUIDE](07_data_preparation/LEARNING_GUIDE.md) | 10-15 hours |
-| **08** | Model Training & Fine-tuning | [LEARNING_GUIDE](08_model_training_finetuning/LEARNING_GUIDE.md) | 15-25 hours |
-| **09** | Generative AI | [LEARNING_GUIDE](09_generative_ai/LEARNING_GUIDE.md) | 6-10 hours |
-| **10** | MLOps | [LEARNING_GUIDE](10_mlops/LEARNING_GUIDE.md) | 8-12 hours |
-| **11** | Cloud Platforms | [LEARNING_GUIDE](11_cloud_platforms/LEARNING_GUIDE.md) | 10-15 hours |
-| **12** | Project Building | [LEARNING_GUIDE](12_project_building/LEARNING_GUIDE.md) | 15-20 hours |
-| **13** | **Capstone Project** | [LEARNING_GUIDE](capstone_voice_replication_pipeline/LEARNING_GUIDE.md) 🎯 | 7 weeks |
-
-⭐ = Foundational module - start here if new to ML  
-🎯 = Final integrative project
-
-**Total Estimated Time**: 100-150 hours + capstone (7 weeks)
-
-### Repository Structure
-```
-voice-cloning-pipeline/
-├── ai_mind_map/               # 🗺️ Interactive learning mindmap & navigation
-│   ├── AI_LEARNING_MINDMAP_MERMAID.md # Visual map (renders on GitHub!)
-│   ├── ai_learning_mindmap.html       # Interactive HTML version
-│   ├── LEARNING_PATHS.md              # 5 customized learning paths
-│   └── README.md                      # Guide to these resources
-├── 00_env_setup/              # Initial environment setup
-├── 01_python_programming/     # Python basics & utilities
-├── 02_deep_learning_basics/   # PyTorch, neural networks, training loops ⭐
-│   ├── README.md              # Module overview
-│   ├── LEARNING_GUIDE.md      # Educational approach
-│   ├── ML_CONCEPTS_EXPLAINED.md  # Deep dive into concepts (30KB)
-│   ├── dl_utils.py            # Reusable utilities
-│   └── 01-05 Python scripts   # Hands-on exercises
-├── 03_tts_systems/            # Text-to-speech implementation
-├── 04_speech_audio_processing/
-├── 05_nlp/
-├── 06_hf_transformers/
-├── 07_data_preparation/
-│   └── data/                  # Datasets (not in git - see setup below)
-├── 08_model_training_finetuning/
-├── 09_generative_ai/
-├── 10_mlops/
-├── 11_cloud_platforms/
-├── 12_project_building/
-└── capstone_voice_replication_pipeline/
-```
-
-**Total Estimated Time**: 100-150 hours + capstone (7 weeks)
+**Tip:** Open `ai_mind_map/ai_complete_learning_path.html` in your browser to see your learning journey!
 
 ---
 
-## 🗺️ Interactive Learning Map & Navigation
+## 📚 Repository Structure
 
-**New!** Explore the complete curriculum with our interactive AI learning mindmap:
+This repository is organized by **AI learning domains** rather than sequential modules, allowing you to navigate based on concepts and build knowledge non-linearly.
 
-- **[🗺️ Visual Mindmap (GitHub)](ai_mind_map/AI_LEARNING_MINDMAP_MERMAID.md)** - Renders directly on GitHub! ⭐
-- **[🎨 Interactive HTML](ai_mind_map/ai_learning_mindmap.html)** - Download and open in browser for full interactivity
-- **[📚 5 Learning Paths](ai_mind_map/LEARNING_PATHS.md)** - Choose the right path for your background:
-  - Complete Beginner (20-25 weeks)
-  - Python Developer → ML Engineer (12-15 weeks)
-  - ML Practitioner → Voice AI (8-10 weeks)
-  - TTS Expert → Production (6-8 weeks)
-  - Weekend Warrior Part-Time (6 months)
-- **[📖 Full Documentation](ai_mind_map/)** - Mindmap structure, reorganization proposals, and guides
+### 🎯 Learning Domains
 
-**Choose your path instead of guessing where to start!**
+| Domain | Status | Description |
+|--------|--------|-------------|
+| **[01_mathematics](01_mathematics/)** | 📋 Planned | Linear algebra, calculus, probability, information theory |
+| **[02_machine_learning](02_machine_learning/)** | ✅ Active | Supervised/unsupervised learning, feature engineering, evaluation |
+| **[03_deep_learning](03_deep_learning/)** | ✅ Active | Neural networks, CNNs, RNNs, optimization, regularization |
+| **[04_computer_vision](04_computer_vision/)** | 📋 Planned | Image classification, object detection, segmentation |
+| **[05_nlp](05_nlp/)** | ✅ Active | Text processing, embeddings, language models, **speech & audio** |
+| **[06_reinforcement_learning](06_reinforcement_learning/)** | 📋 Planned | MDPs, Q-learning, policy gradients, RLHF |
+| **[07_tools_frameworks](07_tools_frameworks/)** | ✅ Active | Python, PyTorch, TensorFlow, Hugging Face, dev tools |
+| **[08_data_engineering](08_data_engineering/)** | ✅ Active | Data collection, preprocessing, pipelines, storage |
+| **[09_research_advanced](09_research_advanced/)** | 📋 Planned | Meta-learning, NAS, multimodal AI, interpretability |
+| **[10_ai_ethics](10_ai_ethics/)** | 📋 Planned | Fairness, privacy, alignment, responsible AI |
+
+**Supporting Resources:**
+- **[ai_mind_map/](ai_mind_map/)** - Interactive visualizations and learning guides
+- **[capstone_projects/](capstone_projects/)** - Integrative voice cloning project
 
 ---
 
-## 🎯 How to Use This Repository
+## 🚀 Quick Start Paths
 
-### For Complete Beginners
-1. **[00_env_setup](00_env_setup/LEARNING_GUIDE.md)** - Set up your development environment
-2. **[01_python_programming](01_python_programming/LEARNING_GUIDE.md)** - Learn Python for ML
-3. **[02_deep_learning_basics](02_deep_learning_basics/LEARNING_GUIDE.md)** - Master core ML concepts ⭐
-   - Also read: [ML_CONCEPTS_EXPLAINED.md](02_deep_learning_basics/ML_CONCEPTS_EXPLAINED.md) (comprehensive reference)
-4. **Continue sequentially** through modules 03-12
-5. **[Capstone](capstone_voice_replication_pipeline/LEARNING_GUIDE.md)** - Build your voice cloning system
+### Path 1: Complete Beginner (Python → ML → DL → TTS)
+1. [Python Basics](07_tools_frameworks/python_basics/)
+2. [Machine Learning Fundamentals](02_machine_learning/)
+3. [Deep Learning](03_deep_learning/)
+4. [NLP & Speech/Audio](05_nlp/speech_audio/)
+5. [Voice Cloning Project](capstone_projects/voice_replication_pipeline/)
 
-### For Intermediate Learners
-- **Have Python experience?** Start at [02_deep_learning_basics](02_deep_learning_basics/LEARNING_GUIDE.md)
+### Path 2: ML Practitioner → Voice AI Specialist  
+1. [Deep Learning Neural Networks](03_deep_learning/neural_networks/)
+2. [Deep Learning Optimization](03_deep_learning/optimization/)
+3. [NLP Speech & Audio](05_nlp/speech_audio/tts/)
+4. [Data Engineering for Audio](08_data_engineering/)
+5. [Voice Cloning Project](capstone_projects/voice_replication_pipeline/)
+
+### Path 3: Explore by Interest
+Use the [interactive learning graph](ai_mind_map/ai_complete_learning_path.html) to:
+- Click on topics you're interested in
+- See prerequisites and related areas
+- Navigate directly to relevant code and resources
+
+---
+
+## ✅ Current Learning Progress
+
+### Completed Domains
 - **Know PyTorch?** Jump to [03_tts_systems](03_tts_systems/LEARNING_GUIDE.md)
 - **Want to deploy?** Focus on [10_mlops](10_mlops/LEARNING_GUIDE.md) and [11_cloud_platforms](11_cloud_platforms/LEARNING_GUIDE.md)
 
@@ -126,67 +97,144 @@ voice-cloning-pipeline/
     +-------------+                   +--------------+
           |                                   |
           +-----------------+-----------------+
-                            |
-                    +---------------+
-                    | DEEP LEARNING |
-                    |    BASICS     |
-                    | (Module 02)   | <-- START HERE
-                    +---------------+
-                            |
-                    +---------------+
-                    | PYTHON & ENV  |
-                    | (Modules 0-1) |
-                    +---------------+
+### Completed Domains
+
+**Machine Learning** ✅
+- Logistic regression and classification fundamentals
+- Supervised learning lab completed
+
+**Deep Learning** ✅
+- 9 comprehensive labs covering:
+  - Neural networks (feedforward, backpropagation, MNIST)
+  - Hidden layer networks, L-layered architectures
+  - Optimization techniques (Adam, gradient descent, initialization)
+  - Regularization methods (dropout, L2, batch normalization)
+  - Gradient checking and debugging
+  - PyTorch and TensorFlow implementations
+
+**NLP / Speech & Audio** ✅
+- Text-to-speech systems with voice cloning
+- Bark TTS experiments
+- XTTS custom voice demos
+- Batch audio processing utilities
+
+**Tools & Frameworks** ✅
+- Python programming (file I/O, data processing)
+- PyTorch fundamentals
+- TensorFlow basics
+- Jupyter notebooks for experimentation
+- Git and development workflows
+
+**Data Engineering** ✅
+- Data collection and preprocessing scripts
+- Audio format conversion tools
+- Dataset preparation pipelines
+
+### 📋 Planned Topics
+- Mathematics foundations (linear algebra, calculus, statistics)
+- Computer vision (image classification, object detection)
+- Reinforcement learning (Q-learning, policy gradients)
+- Advanced transformers and language models
+- Hugging Face ecosystem
+- MLOps and deployment
+- Cloud platforms (AWS, GCP, Azure)
+- AI ethics and responsible AI
+
+---
+
+## 📂 Detailed Repository Structure
+
+```
+voice-cloning-pipeline/
+│
+├── 00_foundations/
+│   └── environment_setup/          # Dev environment configuration
+│
+├── 01_mathematics/                 # 📋 Math fundamentals (planned)
+│   ├── linear_algebra/
+│   ├── calculus/
+│   ├── probability_statistics/
+│   └── information_theory/
+│
+├── 02_machine_learning/            # ✅ ML algorithms & techniques
+│   ├── supervised_learning/        # Logistic regression lab
+│   ├── feature_engineering/
+│   └── model_evaluation/
+│
+├── 03_deep_learning/               # ✅ Neural networks & DL
+│   ├── neural_networks/            # 5 Python scripts, 3 labs
+│   ├── optimization/               # 4 labs (init, gradient checking, optimization)
+│   ├── regularization/             # Regularization techniques lab
+│   ├── cnns/                       # Planned
+│   ├── rnns/                       # Planned
+│   └── transformers/               # Planned
+│
+├── 04_computer_vision/             # 📋 Image processing (planned)
+│
+├── 05_nlp/                         # ✅ Natural language processing
+│   └── speech_audio/
+│       └── tts/                    # 6 TTS scripts and demos
+│
+├── 06_reinforcement_learning/      # 📋 RL algorithms (planned)
+│
+├── 07_tools_frameworks/            # ✅ Development tools
+│   ├── python_basics/              # 3 scripts, 4 notebooks
+│   ├── pytorch/                    # dl_utils.py
+│   ├── tensorflow/                 # TensorFlow intro lab
+│   ├── hugging_face/               # Planned
+│   └── dev_tools/
+│
+├── 08_data_engineering/            # ✅ Data processing
+│   └── data_preprocessing/
+│       └── scripts/                # Audio data preparation
+│
+├── 09_research_advanced/           # 📋 Advanced topics (planned)
+│
+├── 10_ai_ethics/                   # 📋 Responsible AI (planned)
+│
+├── ai_mind_map/                    # 🗺️ Interactive visualizations
+│   ├── ai_complete_learning_path.html     # Main interactive graph
+│   ├── ai_learning_mindmap_graph.html     # Voice cloning specific
+│   ├── GRAPH_DESIGN_GUIDELINES.md         # Design decisions
+│   └── GITHUB_PAGES_SETUP.md              # Deployment guide
+│
+├── capstone_projects/
+│   └── voice_replication_pipeline/        # Integrative project
+│
+└── _archive_old_structure/        # Old sequential module organization
 ```
 
 ---
 
-### Learning Resources in Each Module
+## 🎓 How to Use This Repository
 
-Each module folder contains:
+### 1. **Visual Navigation (Recommended)**
+Open [ai_mind_map/ai_complete_learning_path.html](ai_mind_map/ai_complete_learning_path.html) in your browser:
+- See your learning progress at a glance
+- Click on topics to view details and resources
+- Understand prerequisite relationships
+- Navigate directly to relevant folders
 
-1. **README.md** - Quick overview of the module
-2. **LEARNING_GUIDE.md** - Detailed exercises, tasks, and learning objectives ⭐
-3. **Code/Scripts** - Hands-on practice materials
-4. **Data folders** - Sample datasets (when applicable)
+### 2. **Domain-Based Learning**
+Browse by topic of interest:
+- Want to learn neural networks? → `03_deep_learning/neural_networks/`
+- Interested in speech synthesis? → `05_nlp/speech_audio/tts/`
+- Need Python practice? → `07_tools_frameworks/python_basics/`
 
----
+### 3. **Sequential Path (Traditional)**
+Follow the learning progression:
+1. Mathematics foundations (if needed)
+2. Machine Learning basics
+3. Deep Learning core concepts
+4. Specialized applications (CV, NLP, RL)
+5. Tools & frameworks as needed
+6. Capstone project integration
 
-## Your Learning Journey
-
-```text
-Learning Path Progress:
-    |
-    v
-[x] 00_env_setup
-[x] 01_python_programming  
-[>] 02_deep_learning_basics <-- Foundational module (START HERE)
-[ ] 03_tts_systems
-[ ] 04_speech_audio_processing
-[ ] 05_nlp
-[ ] 06_hf_transformers
-[ ] 07_data_preparation
-[ ] 08_model_training_finetuning
-[ ] 09_generative_ai
-[ ] 10_mlops
-[ ] 11_cloud_platforms
-[ ] 12_project_building
-[ ] capstone_voice_replication_pipeline
-```
-
-**Current Focus**: Deep Learning Basics - Build the foundation for all subsequent modules
-
-**Next Destination**: Text-to-Speech Systems - Apply DL to voice synthesis
-
----
-
-## 📌 Summary
-
-### Three Pillars of This Learning Path:
-
-1. **Theory** - Comprehensive guides in each module's LEARNING_GUIDE.md
-2. **Practice** - Hands-on Python scripts and exercises
-3. **Projects** - Real-world applications culminating in the capstone
+### Learning Resources in Each Folder
+- **README.md** - Overview, status, key topics, prerequisites
+- **Scripts & notebooks** - Hands-on practice materials
+- **Labs** - Structured exercises with objectives
+- Links to related topics and external resources
 
 ---
 
@@ -194,48 +242,72 @@ Learning Path Progress:
 
 ### Prerequisites
 - Python 3.9+
-- PyTorch 2.0+
-- CUDA-capable GPU (optional but recommended)
-- Basic command-line knowledge
+- PyTorch 2.0+ / TensorFlow (depending on your path)
+- CUDA-capable GPU (optional but recommended for DL)
+- Git and basic command-line knowledge
 
 ### Quick Start
-1. **Clone this repository**
-   ```bash
-   git clone https://github.com/yourusername/voice-cloning-pipeline.git
-   cd voice-cloning-pipeline
-   ```
 
-2. **Start with environment setup**
-   ```bash
-   cd 00_env_setup
-   # Follow instructions in README.md
-   ```
+**Option 1: Explore Visually**
+```bash
+git clone https://github.com/Plamen5kov/voice-cloning-pipeline.git
+cd voice-cloning-pipeline
+# Open ai_mind_map/ai_complete_learning_path.html in your browser
+```
 
-3. **Begin learning path**
-   ```bash
-   cd ../02_deep_learning_basics
-   python 01_hello_pytorch.py
-   ```
+**Option 2: Start with Python Basics**
+```bash
+cd 07_tools_frameworks/python_basics
+python convert_m4a_to_wav.py  # Example script
+jupyter notebook  # Explore notebooks
+```
 
-### Data Setup
+**Option 3: Jump to Deep Learning**
+```bash
+cd 03_deep_learning/neural_networks
+python 01_hello_pytorch.py  # PyTorch basics
+python 03_train_mnist.py    # Train your first neural network
+```
 
-**Note:** The `data/` folders are excluded from git via `.gitignore` to keep the repository lightweight. You must manually download or generate required datasets.
+**Option 4: TTS and Voice Cloning**
+```bash
+cd 05_nlp/speech_audio/tts
+python tts_basic_demo.py    # Text-to-speech demo
+```
 
-#### Downloading LibriTTS Sample Data (for TTS training)
+---
 
-1. Visit [LibriTTS on OpenSLR](https://www.openslr.org/60/) or [LibriTTS on Hugging Face](https://huggingface.co/datasets/lj1995/LibriTTS)
-2. Download desired subset (e.g., `dev-clean`)
-3. Extract to `07_data_preparation/data/libritts_sample/LibriTTS/`
-4. Your structure should look like:
-   ```
-   07_data_preparation/
-   └── data/
-       └── libritts_sample/
-           └── LibriTTS/
-               └── dev-clean/
-   ```
+## 📊 Repository Statistics
 
-**Important:** Do not add large datasets or audio files to git!
+- **10 Learning Domains** covering the full AI landscape
+- **60+ Specific Topics** in the learning graph
+- **15+ Labs** completed (neural networks, optimization, regularization)
+- **10+ Python Scripts** for hands-on practice
+- **4 Jupyter Notebooks** for experimentation
+- **6 TTS Demos** for voice cloning
+- **~2.6GB Data** (gitignored) for training and experimentation
+
+---
+
+## 📝 Notes on Repository Organization
+
+### Recent Restructuring (February 2026)
+This repository was recently reorganized from a **sequential module structure** (00-12) to a **domain-based structure** (01_mathematics through 10_ai_ethics) to:
+- Better align with the [AI Learning Path visualization](ai_mind_map/ai_complete_learning_path.html)
+- Enable non-linear, interest-driven learning
+- Group related concepts together
+- Show clear prerequisite relationships
+
+**Old structure preserved in:** `_archive_old_structure/` (gitignored)
+
+**Design decisions documented in:** `ai_mind_map/GRAPH_DESIGN_GUIDELINES.md`
+
+**Migration plan available in:** `REPO_RESTRUCTURE_PLAN.md`
+
+### Data Files
+**Note:** `data/` folders are excluded from git to keep the repository lightweight.
+
+Large datasets (LibriSpeech audio, preprocessed features, etc.) are stored locally but not committed. You may need to download or generate datasets for certain labs and projects.
 
 ---
 

@@ -84,3 +84,6 @@ allfiles.txt
 
 # Ignore EPUBs and other book files
 *.epub
+
+# Archive of old repository structure
+_archive_old_structure/
