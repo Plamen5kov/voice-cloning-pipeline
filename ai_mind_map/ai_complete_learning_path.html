@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete AI Learning Path</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', 'Segoe UI', Roboto, -apple-system, sans-serif;
+      overflow: hidden;
+    }
+    #graph {
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 50%, #ec4899 100%);
+    }
+    .title {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      z-index: 1000;
+      max-width: 400px;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .title.hidden {
+      opacity: 0;
+      transform: translateX(-20px);
+      pointer-events: none;
+    }
+    .title h1 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 400;
+    }
+    .title p {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.4;
+      font-weight: 300;
+    }
+    .title .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: #999;
+      cursor: pointer;
+      padding: 0;
+      width: 25px;
+      height: 25px;
+      line-height: 25px;
+      text-align: center;
+    }
+    .title .close-btn:hover {
+      color: #333;
+    }
+    .controls {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+    .controls button {
+      margin: 5px;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      background: #7c3aed;
+      color: white;
+      cursor: pointer;
+      font-size: 12px;
+      transition: background 0.3s;
+    }
+    .controls button:hover {
+      background: #6d28d9;
+    }
+    .legend {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 15px;
+      border-radius: 0 10px 10px 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      z-index: 1000;
+      transition: transform 0.3s ease;
+      transform: translateX(0);
+    }
+    .legend.collapsed {
+      transform: translateX(-100%);
+    }
+    .legend-toggle {
+      position: absolute;
+      right: -35px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.95);
+      border: none;
+      border-radius: 0 10px 10px 0;
+      padding: 15px 8px;
+      cursor: pointer;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+      font-size: 16px;
+      transition: all 0.3s;
+      z-index: 1001;
+    }
+    .legend-toggle:hover {
+      background: rgba(255, 255, 255, 1);
+      padding-right: 12px;
+    }
+    .legend h3 {
+      font-size: 14px;
+      margin-bottom: 10px;
+      font-weight: 400;
+      color: #333;
+      user-select: none;
+    }
+    .legend-content {
+      overflow: hidden;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin: 5px 0;
+      font-size: 11px;
+      font-weight: 300;
+    }
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      margin-right: 8px;
+      border: 2px solid white;
+    }
+    .node {
+      cursor: pointer;
+      stroke: #fff;
+      stroke-width: 2px;
+    }
+    .node text {
+      font-size: 10px;
+      fill: #1f2937;
+      font-weight: 200;
+      pointer-events: none;
+      stroke: white;
+      stroke-width: 3px;
+      paint-order: stroke fill;
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+    }
+    .link {
+      stroke: rgba(255, 255, 255, 0.3);
+      stroke-width: 1.5px;
+    }
+    .tooltip {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+      max-width: 300px;
+      z-index: 2000;
+    }
+    .info-panel {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.98);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      z-index: 1000;
+      max-width: 400px;
+      max-height: 80vh;
+      overflow-y: auto;
+      display: none;
+    }
+    .info-panel.visible {
+      display: block;
+    }
+    .info-panel h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #333;
+      font-weight: 400;
+    }
+    .info-panel .status {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+    .status.current {
+      background: #10b981;
+      color: white;
+    }
+    .status.planned {
+      background: #f59e0b;
+      color: white;
+    }
+    .status.foundational {
+      background: #3b82f6;
+      color: white;
+    }
+    .info-panel p {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 10px;
+      font-weight: 300;
+    }
+    .info-panel .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #999;
+      cursor: pointer;
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+    }
+    .info-panel .close-btn:hover {
+      color: #333;
+    }
+    .info-panel .links {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #ddd;
+    }
+    .info-panel .links a {
+      display: block;
+      padding: 8px 12px;
+      margin: 5px 0;
+      background: #7c3aed;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: 300;
+      transition: background 0.3s;
+    }
+    .info-panel .links a:hover {
+      background: #6d28d9;
+    }
+    .info-panel ul {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+    .info-panel li {
+      font-size: 12px;
+      color: #555;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+    .info-panel h3 {
+      font-size: 14px;
+      color: #333;
+      margin: 15px 0 8px 0;
+      font-weight: 400;
+    }
+  </style>
+</head>
+<body>
+  <div class="title" id="titleBox">
+    <button class="close-btn" onclick="closeTitleBox()">×</button>
+    <h1>🤖 Complete AI Learning Path</h1>
+    <p>Your comprehensive roadmap to mastering Artificial Intelligence - from foundations to advanced topics. Click any node to explore.</p>
+  </div>
+  
+  <div class="legend collapsed" id="legend">
+    <button class="legend-toggle" onclick="toggleLegend()" id="legendToggle">▶</button>
+    <h3>Learning Areas</h3>
+    <div class="legend-content">
+      <div class="legend-item"><div class="legend-color" style="background: #ef4444;"></div>AI Core</div>
+      <div class="legend-item"><div class="legend-color" style="background: #3b82f6;"></div>Mathematics</div>
+      <div class="legend-item"><div class="legend-color" style="background: #8b5cf6;"></div>Machine Learning</div>
+      <div class="legend-item"><div class="legend-color" style="background: #ec4899;"></div>Deep Learning</div>
+      <div class="legend-item"><div class="legend-color" style="background: #10b981;"></div>Computer Vision</div>
+      <div class="legend-item"><div class="legend-color" style="background: #f59e0b;"></div>NLP</div>
+      <div class="legend-item"><div class="legend-color" style="background: #14b8a6;"></div>RL & Optimization</div>
+      <div class="legend-item"><div class="legend-color" style="background: #6366f1;"></div>Tools & Systems</div>
+      <div class="legend-item"><div class="legend-color" style="background: #a855f7;"></div>Research & Advanced</div>
+      <div class="legend-item"><div class="legend-color" style="background: #64748b;"></div>Ethics & Safety</div>
+    </div>
+  </div>
+  
+  <div class="controls">
+    <button onclick="resetSimulation()">Reset Layout</button>
+    <button onclick="centerView()">Center View</button>
+  </div>
+  
+  <div class="info-panel" id="infoPanel">
+    <button class="close-btn" onclick="closeInfoPanel()">×</button>
+    <div id="infoPanelContent"></div>
+  </div>
+  
+  <div class="tooltip" id="tooltip"></div>
+  <svg id="graph"></svg>
+  
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  
+  <script>
+    // Detailed information for each node
+    const nodeInfo = {
+      0: {
+        title: "Artificial Intelligence",
+        status: "current",
+        description: "The complete field of creating intelligent machines that can simulate human cognitive functions.",
+        details: ["Encompasses ML, DL, CV, NLP, RL and more", "Combines computer science, mathematics, and domain expertise", "Rapidly evolving field with real-world applications"],
+        keyTopics: ["Foundations & Theory", "Practical Implementation", "Ethics & Responsibility"],
+        links: []
+      },
+      
+      // Mathematics - Level 1 (id: 1)
+      1: {
+        title: "Mathematics Foundations",
+        status: "foundational",
+        description: "Essential mathematical concepts that underpin all of AI and machine learning.",
+        details: ["Linear algebra for data transformations", "Calculus for optimization", "Probability for uncertainty", "Statistics for inference"],
+        keyTopics: ["Linear Algebra", "Calculus", "Probability & Statistics"],
+        links: []
+      },
+      
+      // Machine Learning - Level 1 (id: 2)
+      2: {
+        title: "Machine Learning",
+        status: "current",
+        description: "Algorithms that learn patterns from data without being explicitly programmed.",
+        details: ["Supervised, unsupervised, and semi-supervised learning", "Classical algorithms like regression, decision trees, SVM", "Foundation for deep learning"],
+        keyTopics: ["Supervised Learning", "Unsupervised Learning", "Model Evaluation"],
+        links: []
+      },
+      
+      // Deep Learning - Level 1 (id: 3)
+      3: {
+        title: "Deep Learning",
+        status: "current",
+        description: "Neural networks with multiple layers that learn hierarchical representations.",
+        details: ["Foundation of modern AI", "Powers computer vision, NLP, and more", "Requires GPU acceleration"],
+        keyTopics: ["Neural Networks", "CNNs", "RNNs", "Transformers"],
+        links: [
+          { text: "Deep Learning Basics", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/main/02_deep_learning_basics/" }
+        ]
+      },
+      
+      // Computer Vision - Level 1 (id: 4)
+      4: {
+        title: "Computer Vision",
+        status: "planned",
+        description: "Teaching machines to interpret and understand visual information from the world.",
+        details: ["Image classification and object detection", "Semantic segmentation", "Face recognition", "Video analysis"],
+        keyTopics: ["CNNs", "Object Detection", "Image Segmentation"],
+        links: []
+      },
+      
+      // NLP - Level 1 (id: 5)
+      5: {
+        title: "Natural Language Processing",
+        status: "current",
+        description: "Enabling machines to understand, interpret, and generate human language.",
+        details: ["Text processing and analysis", "Language models", "Machine translation", "Sentiment analysis"],
+        keyTopics: ["Tokenization", "Embeddings", "Transformers", "LLMs"],
+        links: [
+          { text: "NLP Module", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/main/05_nlp/" },
+          { text: "Transformers", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/main/06_hf_transformers/" }
+        ]
+      },
+      
+      // Reinforcement Learning - Level 1 (id: 6)
+      6: {
+        title: "Reinforcement Learning",
+        status: "planned",
+        description: "Training agents to make decisions by rewarding desired behaviors.",
+        details: ["Q-learning and policy gradients", "Deep Q-Networks (DQN)", "Actor-Critic methods", "Applications in robotics and games"],
+        keyTopics: ["MDPs", "Q-Learning", "Policy Gradients", "RLHF"],
+        links: []
+      },
+      
+      // Tools & Frameworks - Level 1 (id: 7)
+      7: {
+        title: "Tools & Frameworks",
+        status: "current",
+        description: "Essential software tools and libraries for building AI systems.",
+        details: ["PyTorch and TensorFlow", "Hugging Face ecosystem", "Development environments", "Version control"],
+        keyTopics: ["PyTorch", "TensorFlow", "Hugging Face", "MLOps"],
+        links: [
+          { text: "Environment Setup", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/main/00_env_setup/" },
+          { text: "Python Programming", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/main/01_python_programming/" }
+        ]
+      },
+      
+      // Data Engineering - Level 1 (id: 8)
+      8: {
+        title: "Data Engineering",
+        status: "current",
+        description: "Collecting, processing, and managing data for AI systems.",
+        details: ["Data collection and cleaning", "Feature engineering", "Data pipelines", "Storage and databases"],
+        keyTopics: ["Data Preprocessing", "Feature Engineering", "Pipelines"],
+        links: [
+          { text: "Data Preparation", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/main/07_data_preparation/" }
+        ]
+      },
+      
+      // Research & Advanced - Level 1 (id: 9)
+      9: {
+        title: "Research & Advanced Topics",
+        status: "planned",
+        description: "Cutting-edge research areas and advanced AI concepts.",
+        details: ["Meta-learning and few-shot learning", "Neural architecture search", "Continual learning", "AI safety research"],
+        keyTopics: ["Meta-Learning", "AutoML", "Multimodal AI", "AGI"],
+        links: []
+      },
+      
+      // Ethics & Safety - Level 1 (id: 10)
+      10: {
+        title: "AI Ethics & Safety",
+        status: "foundational",
+        description: "Responsible development and deployment of AI systems.",
+        details: ["Bias and fairness", "Privacy and security", "Transparency and explainability", "Societal impact"],
+        keyTopics: ["Fairness", "Explainability", "Privacy", "Alignment"],
+        links: []
+      },
+      
+      // LEVEL 2 NODES - Mathematics (11-16)
+      11: {
+        title: "Linear Algebra",
+        status: "foundational",
+        description: "Vectors, matrices, and operations essential for manipulating data.",
+        details: ["Vectors and vector spaces", "Matrix operations and decompositions", "Eigenvalues and eigenvectors", "Used in all neural network computations"],
+        keyTopics: ["Matrices", "Vectors", "Eigenvalues", "SVD"],
+        links: []
+      },
+      12: {
+        title: "Calculus",
+        status: "foundational",
+        description: "Derivatives and optimization for training neural networks.",
+        details: ["Derivatives and gradients", "Chain rule for backpropagation", "Partial derivatives", "Optimization theory"],
+        keyTopics: ["Derivatives", "Gradients", "Optimization"],
+        links: []
+      },
+      13: {
+        title: "Probability & Statistics",
+        status: "foundational",
+        description: "Understanding uncertainty and making statistical inferences.",
+        details: ["Probability distributions", "Bayes' theorem", "Hypothesis testing", "Statistical inference"],
+        keyTopics: ["Distributions", "Bayes Theorem", "Inference"],
+        links: []
+      },
+      14: {
+        title: "Information Theory",
+        status: "planned",
+        description: "Quantifying information and understanding entropy.",
+        details: ["Entropy and cross-entropy", "KL divergence", "Mutual information", "Used in loss functions"],
+        keyTopics: ["Entropy", "KL Divergence", "Cross-Entropy"],
+        links: []
+      },
+      
+      // LEVEL 2 NODES - Machine Learning (15-22)
+      15: {
+        title: "Supervised Learning",
+        status: "foundational",
+        description: "Learning from labeled data to make predictions.",
+        details: ["Regression and classification", "Linear models", "Decision trees and random forests", "Support vector machines"],
+        keyTopics: ["Regression", "Classification", "SVM", "Trees"],
+        links: []
+      },
+      16: {
+        title: "Unsupervised Learning",
+        status: "planned",
+        description: "Finding patterns in unlabeled data.",
+        details: ["Clustering (K-means, hierarchical)", "Dimensionality reduction (PCA, t-SNE)", "Anomaly detection", "Association rules"],
+        keyTopics: ["Clustering", "PCA", "Anomaly Detection"],
+        links: []
+      },
+      17: {
+        title: "Feature Engineering",
+        status: "current",
+        description: "Creating and selecting features to improve model performance.",
+        details: ["Feature extraction", "Feature selection", "Feature scaling", "Domain-specific features"],
+        keyTopics: ["Extraction", "Selection", "Transformation"],
+        links: [
+          { text: "Data Preparation", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/main/07_data_preparation/" }
+        ]
+      },
+      18: {
+        title: "Model Evaluation",
+        status: "current",
+        description: "Assessing model performance and generalization.",
+        details: ["Train/validation/test splits", "Cross-validation", "Metrics (accuracy, precision, recall, F1)", "Confusion matrices"],
+        keyTopics: ["Validation", "Metrics", "Cross-Validation"],
+        links: []
+      },
+      19: {
+        title: "Ensemble Methods",
+        status: "planned",
+        description: "Combining multiple models for better performance.",
+        details: ["Bagging and boosting", "Random forests", "Gradient boosting (XGBoost, LightGBM)", "Stacking"],
+        keyTopics: ["Boosting", "Bagging", "XGBoost"],
+        links: []
+      },
+      
+      // LEVEL 2 NODES - Deep Learning (20-27)
+      20: {
+        title: "Neural Networks",
+        status: "current",
+        description: "Fundamental building blocks of deep learning.",
+        details: ["Perceptrons and multilayer networks", "Activation functions", "Forward and backward propagation", "Weight initialization"],
+        keyTopics: ["Perceptrons", "Backpropagation", "Activations"],
+        links: [
+          { text: "Deep Learning Basics", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/main/02_deep_learning_basics/" }
+        ]
+      },
+      21: {
+        title: "Convolutional Neural Networks",
+        status: "planned",
+        description: "Networks specialized for processing grid-like data (images).",
+        details: ["Convolution and pooling layers", "Feature maps", "Popular architectures (ResNet, VGG, EfficientNet)", "Transfer learning"],
+        keyTopics: ["Convolutions", "Pooling", "ResNet", "Transfer Learning"],
+        links: []
+      },
+      22: {
+        title: "Recurrent Neural Networks",
+        status: "planned",
+        description: "Networks for sequential data processing.",
+        details: ["LSTM and GRU", "Sequence modeling", "Time series prediction", "Vanishing gradient problem"],
+        keyTopics: ["LSTM", "GRU", "Sequences"],
+        links: []
+      },
+      23: {
+        title: "Transformers",
+        status: "current",
+        description: "Attention-based architecture dominating modern AI.",
+        details: ["Self-attention mechanism", "Multi-head attention", "Positional encoding", "BERT, GPT, T5 architectures"],
+        keyTopics: ["Attention", "BERT", "GPT", "Positional Encoding"],
+        links: [
+          { text: "Transformers Module", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/main/06_hf_transformers/" }
+        ]
+      },
+      24: {
+        title: "Generative Models",
+        status: "current",
+        description: "Models that generate new data similar to training data.",
+        details: ["GANs (Generative Adversarial Networks)", "VAEs (Variational Autoencoders)", "Diffusion models", "Text-to-image generation"],
+        keyTopics: ["GANs", "VAEs", "Diffusion", "Stable Diffusion"],
+        links: [
+          { text: "Generative AI", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/main/09_generative_ai/" }
+        ]
+      },
+      25: {
+        title: "Optimization",
+        status: "current",
+        description: "Algorithms for training neural networks efficiently.",
+        details: ["Gradient descent variants", "SGD, Adam, RMSprop", "Learning rate scheduling", "Batch normalization"],
+        keyTopics: ["SGD", "Adam", "Learning Rate", "BatchNorm"],
+        links: [
+          { text: "Optimization Lab", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/main/02_deep_learning_basics/08_lab_optimization/" }
+        ]
+      },
+      26: {
+        title: "Regularization",
+        status: "current",
+        description: "Techniques to prevent overfitting.",
+        details: ["L1/L2 regularization", "Dropout", "Early stopping", "Data augmentation"],
+        keyTopics: ["Dropout", "L2 Regularization", "Data Augmentation"],
+        links: [
+          { text: "Regularization Lab", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/main/02_deep_learning_basics/06_lab_regularization/" }
+        ]
+      },
+      
+      // LEVEL 2 NODES - Computer Vision (27-31)
+      27: {
+        title: "Image Classification",
+        status: "planned",
+        description: "Categorizing images into predefined classes.",
+        details: ["CNNs for classification", "Transfer learning", "Data augmentation", "Fine-tuning pretrained models"],
+        keyTopics: ["CNNs", "Transfer Learning", "ImageNet"],
+        links: []
+      },
+      28: {
+        title: "Object Detection",
+        status: "planned",
+        description: "Locating and classifying objects in images.",
+        details: ["YOLO, R-CNN, SSD", "Bounding boxes", "Non-max suppression", "Real-time detection"],
+        keyTopics: ["YOLO", "R-CNN", "Bounding Boxes"],
+        links: []
+      },
+      29: {
+        title: "Semantic Segmentation",
+        status: "planned",
+        description: "Pixel-level classification of images.",
+        details: ["U-Net architecture", "FCN (Fully Convolutional Networks)", "Medical imaging", "Autonomous driving"],
+        keyTopics: ["U-Net", "FCN", "Pixel Classification"],
+        links: []
+      },
+      30: {
+        title: "Face Recognition",
+        status: "planned",
+        description: "Identifying or verifying faces in images.",
+        details: ["Face detection and alignment", "Face embeddings", "Siamese networks", "Triplet loss"],
+        keyTopics: ["FaceNet", "Siamese Networks", "Embeddings"],
+        links: []
+      },
+      
+      // LEVEL 2 NODES - NLP (31-36)
+      31: {
+        title: "Text Processing",
+        status: "current",
+        description: "Fundamental text manipulation and preparation.",
+        details: ["Tokenization", "Stemming and lemmatization", "Stop word removal", "Text normalization"],
+        keyTopics: ["Tokenization", "Normalization", "Preprocessing"],
+        links: [
+          { text: "NLP Module", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/main/05_nlp/" }
+        ]
+      },
+      32: {
+        title: "Word Embeddings",
+        status: "planned",
+        description: "Dense vector representations of words.",
+        details: ["Word2Vec (CBOW, Skip-gram)", "GloVe", "FastText", "Contextual embeddings"],
+        keyTopics: ["Word2Vec", "GloVe", "Semantic Similarity"],
+        links: []
+      },
+      33: {
+        title: "Language Models",
+        status: "current",
+        description: "Models that predict and generate text.",
+        details: ["GPT family (GPT-3, GPT-4)", "BERT and variants", "T5 and BART", "Instruction tuning"],
+        keyTopics: ["GPT", "BERT", "Fine-tuning", "Prompting"],
+        links: [
+          { text: "Transformers", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/main/06_hf_transformers/" }
+        ]
+      },
+      34: {
+        title: "Speech & Audio",
+        status: "current",
+        description: "Processing and generating speech and audio.",
+        details: ["Speech recognition (ASR)", "Text-to-speech (TTS)", "Speaker recognition", "Audio feature extraction"],
+        keyTopics: ["ASR", "TTS", "Voice Cloning", "Audio Features"],
+        links: [
+          { text: "Speech Processing", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/main/04_speech_audio_processing/" },
+          { text: "TTS Systems", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/main/03_tts_systems/" }
+        ]
+      },
+      35: {
+        title: "Question Answering",
+        status: "planned",
+        description: "Systems that answer questions in natural language.",
+        details: ["Reading comprehension", "Open-domain QA", "Retrieval-augmented generation", "SQuAD dataset"],
+        keyTopics: ["RAG", "Retrieval", "BERT for QA"],
+        links: []
+      },
+      36: {
+        title: "Machine Translation",
+        status: "planned",
+        description: "Automatically translating text between languages.",
+        details: ["Seq2seq models", "Attention mechanism", "Transformer architectures", "Multilingual models"],
+        keyTopics: ["Seq2Seq", "Attention", "BLEU Score"],
+        links: []
+      },
+      
+      // LEVEL 2 NODES - Reinforcement Learning (37-40)
+      37: {
+        title: "Markov Decision Processes",
+        status: "planned",
+        description: "Mathematical framework for decision making.",
+        details: ["States, actions, rewards", "Policies and value functions", "Bellman equations", "Dynamic programming"],
+        keyTopics: ["MDPs", "Bellman Equation", "Value Functions"],
+        links: []
+      },
+      38: {
+        title: "Q-Learning & DQN",
+        status: "planned",
+        description: "Value-based reinforcement learning methods.",
+        details: ["Q-learning algorithm", "Deep Q-Networks", "Experience replay", "Target networks"],
+        keyTopics: ["Q-Learning", "DQN", "Experience Replay"],
+        links: []
+      },
+      39: {
+        title: "Policy Gradient Methods",
+        status: "planned",
+        description: "Directly learning policies for continuous actions.",
+        details: ["REINFORCE algorithm", "Actor-Critic", "PPO (Proximal Policy Optimization)", "A3C"],
+        keyTopics: ["Policy Gradients", "PPO", "Actor-Critic"],
+        links: []
+      },
+      40: {
+        title: "RLHF",
+        status: "planned",
+        description: "Reinforcement Learning from Human Feedback.",
+        details: ["Reward modeling", "Used in ChatGPT", "Preference learning", "Alignment research"],
+        keyTopics: ["Human Feedback", "Alignment", "ChatGPT"],
+        links: []
+      },
+      
+      // LEVEL 2 NODES - Tools & Frameworks (41-46)
+      41: {
+        title: "PyTorch",
+        status: "current",
+        description: "Dynamic deep learning framework preferred in research.",
+        details: ["Tensor operations", "Autograd", "nn.Module", "Dynamic computational graphs"],
+        keyTopics: ["Tensors", "Autograd", "Training Loops"],
+        links: [
+          { text: "PyTorch Basics", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/main/02_deep_learning_basics/01_hello_pytorch.py" }
+        ]
+      },
+      42: {
+        title: "TensorFlow & Keras",
+        status: "foundational",
+        description: "Production-ready deep learning framework by Google.",
+        details: ["TensorFlow 2.x", "Keras high-level API", "TensorFlow Lite for mobile", "TensorFlow Serving"],
+        keyTopics: ["Keras", "TF Serving", "Graph Mode"],
+        links: [
+          { text: "TensorFlow Intro", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/main/02_deep_learning_basics/09_lab_tensorflow_intro/" }
+        ]
+      },
+      43: {
+        title: "Hugging Face",
+        status: "current",
+        description: "Platform for sharing and using pre-trained models.",
+        details: ["Transformers library", "Datasets library", "Model Hub", "Spaces for demos"],
+        keyTopics: ["Model Hub", "Pipeline API", "Datasets"],
+        links: [
+          { text: "Transformers Module", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/main/06_hf_transformers/" }
+        ]
+      },
+      44: {
+        title: "MLOps Tools",
+        status: "current",
+        description: "Tools for productionizing ML models.",
+        details: ["MLflow for tracking", "Docker for containerization", "Kubernetes for orchestration", "CI/CD pipelines"],
+        keyTopics: ["MLflow", "Docker", "Kubernetes", "CI/CD"],
+        links: [
+          { text: "MLOps Module", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/main/10_mlops/" }
+        ]
+      },
+      45: {
+        title: "Cloud Platforms",
+        status: "current",
+        description: "Cloud services for training and deploying AI.",
+        details: ["AWS SageMaker", "Google Cloud AI", "Azure ML", "GPU instances"],
+        keyTopics: ["AWS", "GCP", "Azure", "GPU Instances"],
+        links: [
+          { text: "Cloud Platforms", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/main/11_cloud_platforms/" }
+        ]
+      },
+      46: {
+        title: "Development Tools",
+        status: "current",
+        description: "Essential tools for AI development.",
+        details: ["Jupyter notebooks", "Git version control", "Virtual environments", "Python packaging"],
+        keyTopics: ["Jupyter", "Git", "conda/venv"],
+        links: [
+          { text: "Environment Setup", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/main/00_env_setup/" }
+        ]
+      },
+      
+      // LEVEL 2 NODES - Data Engineering (47-50)
+      47: {
+        title: "Data Collection",
+        status: "current",
+        description: "Gathering data from various sources.",
+        details: ["Web scraping", "APIs", "Databases", "Sensors and IoT"],
+        keyTopics: ["Web Scraping", "APIs", "Databases"],
+        links: []
+      },
+      48: {
+        title: "Data Preprocessing",
+        status: "current",
+        description: "Cleaning and preparing data for training.",
+        details: ["Missing value handling", "Outlier detection", "Normalization and scaling", "Data validation"],
+        keyTopics: ["Cleaning", "Normalization", "Validation"],
+        links: [
+          { text: "Data Preparation", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/main/07_data_preparation/" }
+        ]
+      },
+      49: {
+        title: "Data Pipelines",
+        status: "planned",
+        description: "Automated workflows for data processing.",
+        details: ["ETL processes", "Apache Airflow", "Data versioning", "Batch and stream processing"],
+        keyTopics: ["ETL", "Airflow", "Streaming"],
+        links: []
+      },
+      50: {
+        title: "Data Storage",
+        status: "planned",
+        description: "Storing and managing large-scale data.",
+        details: ["SQL databases", "NoSQL (MongoDB, Cassandra)", "Data lakes", "Object storage (S3)"],
+        keyTopics: ["SQL", "NoSQL", "Data Lakes"],
+        links: []
+      },
+      
+      // LEVEL 2 NODES - Research & Advanced (51-56)
+      51: {
+        title: "Meta-Learning",
+        status: "planned",
+        description: "Learning to learn - adapting quickly to new tasks.",
+        details: ["Few-shot learning", "MAML (Model-Agnostic Meta-Learning)", "Prototypical networks", "Transfer learning"],
+        keyTopics: ["Few-Shot", "MAML", "Quick Adaptation"],
+        links: []
+      },
+      52: {
+        title: "Neural Architecture Search",
+        status: "planned",
+        description: "Automatically discovering optimal neural network architectures.",
+        details: ["AutoML", "NAS algorithms", "ENAS", "Architecture optimization"],
+        keyTopics: ["AutoML", "NAS", "Architecture Optimization"],
+        links: []
+      },
+      53: {
+        title: "Multimodal AI",
+        status: "planned",
+        description: "Combining multiple data modalities (text, image, audio).",
+        details: ["CLIP (Contrastive Language-Image Pre-training)", "Vision-language models", "Audio-visual learning", "Cross-modal retrieval"],
+        keyTopics: ["CLIP", "Vision-Language", "Multimodal Fusion"],
+        links: []
+      },
+      54: {
+        title: "Continual Learning",
+        status: "planned",
+        description: "Learning continuously without forgetting previous knowledge.",
+        details: ["Catastrophic forgetting", "Elastic Weight Consolidation", "Lifelong learning", "Progressive neural networks"],
+        keyTopics: ["Lifelong Learning", "Catastrophic Forgetting"],
+        links: []
+      },
+      55: {
+        title: "Interpretability",
+        status: "planned",
+        description: "Understanding and explaining AI model decisions.",
+        details: ["SHAP and LIME", "Attention visualization", "Saliency maps", "Model debugging"],
+        keyTopics: ["SHAP", "LIME", "Explainability"],
+        links: []
+      },
+      
+      // LEVEL 2 NODES - Ethics & Safety (56-59)
+      56: {
+        title: "Fairness & Bias",
+        status: "foundational",
+        description: "Ensuring AI systems are fair and unbiased.",
+        details: ["Bias detection", "Fairness metrics", "Debiasing techniques", "Demographic parity"],
+        keyTopics: ["Bias Detection", "Fairness Metrics", "Debiasing"],
+        links: []
+      },
+      57: {
+        title: "Privacy & Security",
+        status: "foundational",
+        description: "Protecting user data and model security.",
+        details: ["Differential privacy", "Federated learning", "Adversarial attacks", "Model extraction"],
+        keyTopics: ["Differential Privacy", "Federated Learning", "Security"],
+        links: []
+      },
+      58: {
+        title: "AI Alignment",
+        status: "planned",
+        description: "Ensuring AI systems align with human values.",
+        details: ["Value alignment problem", "AI safety research", "RLHF for alignment", "Constitutional AI"],
+        keyTopics: ["Value Alignment", "Safety", "RLHF"],
+        links: []
+      },
+      59: {
+        title: "Responsible AI",
+        status: "foundational",
+        description: "Ethical development and deployment of AI.",
+        details: ["AI governance", "Transparency", "Accountability", "Societal impact assessment"],
+        keyTopics: ["Governance", "Transparency", "Ethics"],
+        links: []
+      }
+    };
+
+    // Data structure
+    const data = {
+      nodes: [
+        // Center (0)
+        { id: 0, name: "Artificial Intelligence", level: 0, category: "core" },
+        
+        // Level 1 - Main areas (1-10)
+        { id: 1, name: "Mathematics", level: 1, category: "math" },
+        { id: 2, name: "Machine Learning", level: 1, category: "ml" },
+        { id: 3, name: "Deep Learning", level: 1, category: "dl" },
+        { id: 4, name: "Computer Vision", level: 1, category: "cv" },
+        { id: 5, name: "NLP", level: 1, category: "nlp" },
+        { id: 6, name: "Reinforcement Learning", level: 1, category: "rl" },
+        { id: 7, name: "Tools & Frameworks", level: 1, category: "tools" },
+        { id: 8, name: "Data Engineering", level: 1, category: "tools" },
+        { id: 9, name: "Research & Advanced", level: 1, category: "research" },
+        { id: 10, name: "AI Ethics", level: 1, category: "ethics" },
+        
+        // Level 2 - Mathematics (11-14)
+        { id: 11, name: "Linear Algebra", level: 2, category: "math" },
+        { id: 12, name: "Calculus", level: 2, category: "math" },
+        { id: 13, name: "Probability & Stats", level: 2, category: "math" },
+        { id: 14, name: "Information Theory", level: 2, category: "math" },
+        
+        // Level 2 - Machine Learning (15-19)
+        { id: 15, name: "Supervised Learning", level: 2, category: "ml" },
+        { id: 16, name: "Unsupervised Learning", level: 2, category: "ml" },
+        { id: 17, name: "Feature Engineering", level: 2, category: "ml" },
+        { id: 18, name: "Model Evaluation", level: 2, category: "ml" },
+        { id: 19, name: "Ensemble Methods", level: 2, category: "ml" },
+        
+        // Level 2 - Deep Learning (20-26)
+        { id: 20, name: "Neural Networks", level: 2, category: "dl" },
+        { id: 21, name: "CNNs", level: 2, category: "dl" },
+        { id: 22, name: "RNNs", level: 2, category: "dl" },
+        { id: 23, name: "Transformers", level: 2, category: "dl" },
+        { id: 24, name: "Generative Models", level: 2, category: "dl" },
+        { id: 25, name: "Optimization", level: 2, category: "dl" },
+        { id: 26, name: "Regularization", level: 2, category: "dl" },
+        
+        // Level 2 - Computer Vision (27-30)
+        { id: 27, name: "Image Classification", level: 2, category: "cv" },
+        { id: 28, name: "Object Detection", level: 2, category: "cv" },
+        { id: 29, name: "Segmentation", level: 2, category: "cv" },
+        { id: 30, name: "Face Recognition", level: 2, category: "cv" },
+        
+        // Level 2 - NLP (31-36)
+        { id: 31, name: "Text Processing", level: 2, category: "nlp" },
+        { id: 32, name: "Word Embeddings", level: 2, category: "nlp" },
+        { id: 33, name: "Language Models", level: 2, category: "nlp" },
+        { id: 34, name: "Speech & Audio", level: 2, category: "nlp" },
+        { id: 35, name: "Question Answering", level: 2, category: "nlp" },
+        { id: 36, name: "Translation", level: 2, category: "nlp" },
+        
+        // Level 2 - RL (37-40)
+        { id: 37, name: "MDPs", level: 2, category: "rl" },
+        { id: 38, name: "Q-Learning & DQN", level: 2, category: "rl" },
+        { id: 39, name: "Policy Gradients", level: 2, category: "rl" },
+        { id: 40, name: "RLHF", level: 2, category: "rl" },
+        
+        // Level 2 - Tools (41-46)
+        { id: 41, name: "PyTorch", level: 2, category: "tools" },
+        { id: 42, name: "TensorFlow", level: 2, category: "tools" },
+        { id: 43, name: "Hugging Face", level: 2, category: "tools" },
+        { id: 44, name: "MLOps Tools", level: 2, category: "tools" },
+        { id: 45, name: "Cloud Platforms", level: 2, category: "tools" },
+        { id: 46, name: "Dev Tools", level: 2, category: "tools" },
+        
+        // Level 2 - Data Engineering (47-50)
+        { id: 47, name: "Data Collection", level: 2, category: "tools" },
+        { id: 48, name: "Data Preprocessing", level: 2, category: "tools" },
+        { id: 49, name: "Data Pipelines", level: 2, category: "tools" },
+        { id: 50, name: "Data Storage", level: 2, category: "tools" },
+        
+        // Level 2 - Research (51-55)
+        { id: 51, name: "Meta-Learning", level: 2, category: "research" },
+        { id: 52, name: "Neural Architecture Search", level: 2, category: "research" },
+        { id: 53, name: "Multimodal AI", level: 2, category: "research" },
+        { id: 54, name: "Continual Learning", level: 2, category: "research" },
+        { id: 55, name: "Interpretability", level: 2, category: "research" },
+        
+        // Level 2 - Ethics (56-59)
+        { id: 56, name: "Fairness & Bias", level: 2, category: "ethics" },
+        { id: 57, name: "Privacy & Security", level: 2, category: "ethics" },
+        { id: 58, name: "AI Alignment", level: 2, category: "ethics" },
+        { id: 59, name: "Responsible AI", level: 2, category: "ethics" }
+      ],
+      links: [
+        // Core to Level 1
+        { source: 0, target: 1 },
+        { source: 0, target: 2 },
+        { source: 0, target: 3 },
+        { source: 0, target: 4 },
+        { source: 0, target: 5 },
+        { source: 0, target: 6 },
+        { source: 0, target: 7 },
+        { source: 0, target: 8 },
+        { source: 0, target: 9 },
+        { source: 0, target: 10 },
+        
+        // Mathematics to Level 2
+        { source: 1, target: 11 },
+        { source: 1, target: 12 },
+        { source: 1, target: 13 },
+        { source: 1, target: 14 },
+        
+        // Machine Learning to Level 2
+        { source: 2, target: 15 },
+        { source: 2, target: 16 },
+        { source: 2, target: 17 },
+        { source: 2, target: 18 },
+        { source: 2, target: 19 },
+        
+        // Deep Learning to Level 2
+        { source: 3, target: 20 },
+        { source: 3, target: 21 },
+        { source: 3, target: 22 },
+        { source: 3, target: 23 },
+        { source: 3, target: 24 },
+        { source: 3, target: 25 },
+        { source: 3, target: 26 },
+        
+        // Computer Vision to Level 2
+        { source: 4, target: 27 },
+        { source: 4, target: 28 },
+        { source: 4, target: 29 },
+        { source: 4, target: 30 },
+        
+        // NLP to Level 2
+        { source: 5, target: 31 },
+        { source: 5, target: 32 },
+        { source: 5, target: 33 },
+        { source: 5, target: 34 },
+        { source: 5, target: 35 },
+        { source: 5, target: 36 },
+        
+        // RL to Level 2
+        { source: 6, target: 37 },
+        { source: 6, target: 38 },
+        { source: 6, target: 39 },
+        { source: 6, target: 40 },
+        
+        // Tools to Level 2
+        { source: 7, target: 41 },
+        { source: 7, target: 42 },
+        { source: 7, target: 43 },
+        { source: 7, target: 44 },
+        { source: 7, target: 45 },
+        { source: 7, target: 46 },
+        
+        // Data Engineering to Level 2
+        { source: 8, target: 47 },
+        { source: 8, target: 48 },
+        { source: 8, target: 49 },
+        { source: 8, target: 50 },
+        
+        // Research to Level 2
+        { source: 9, target: 51 },
+        { source: 9, target: 52 },
+        { source: 9, target: 53 },
+        { source: 9, target: 54 },
+        { source: 9, target: 55 },
+        
+        // Ethics to Level 2
+        { source: 10, target: 56 },
+        { source: 10, target: 57 },
+        { source: 10, target: 58 },
+        { source: 10, target: 59 },
+        
+        // Cross-domain connections (dependencies)
+        { source: 1, target: 2 },   // Math -> ML
+        { source: 1, target: 3 },   // Math -> DL
+        { source: 2, target: 3 },   // ML -> DL
+        { source: 3, target: 4 },   // DL -> CV
+        { source: 3, target: 5 },   // DL -> NLP
+        { source: 3, target: 6 },   // DL -> RL
+        { source: 2, target: 8 },   // ML -> Data Eng
+        { source: 7, target: 3 },   // Tools -> DL
+        { source: 8, target: 2 },   // Data Eng -> ML
+        { source: 10, target: 0 },  // Ethics -> Core (important!)
+        { source: 23, target: 5 },  // Transformers -> NLP
+        { source: 21, target: 4 },  // CNNs -> CV
+        { source: 23, target: 33 }, // Transformers -> Language Models
+        { source: 41, target: 20 }, // PyTorch -> Neural Networks
+        { source: 20, target: 15 }, // Neural Networks -> Supervised Learning
+        { source: 12, target: 25 }, // Calculus -> Optimization
+        { source: 40, target: 33 }, // RLHF -> Language Models
+      ]
+    };
+
+    // Color scheme by category
+    const colors = {
+      core: '#ef4444',
+      math: '#3b82f6',
+      ml: '#8b5cf6',
+      dl: '#ec4899',
+      cv: '#10b981',
+      nlp: '#f59e0b',
+      rl: '#14b8a6',
+      tools: '#6366f1',
+      research: '#a855f7',
+      ethics: '#64748b'
+    };
+
+    // Setup SVG
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    
+    const svg = d3.select('#graph')
+      .attr('width', width)
+      .attr('height', height);
+    
+    const g = svg.append('g');
+    
+    // Add zoom behavior
+    const zoom = d3.zoom()
+      .scaleExtent([0.1, 4])
+      .on('zoom', (event) => {
+        g.attr('transform', event.transform);
+      });
+    
+    svg.call(zoom);
+    
+    // Close info panel when clicking on background
+    svg.on('click', () => {
+      closeInfoPanel();
+    });
+
+    // Create simulation
+    const simulation = d3.forceSimulation(data.nodes)
+      .force('link', d3.forceLink(data.links).id(d => d.id).distance(d => {
+        return d.target.level === 2 ? 80 : 150;
+      }))
+      .force('charge', d3.forceManyBody().strength(d => {
+        if (d.level === 0) return -2000;
+        if (d.level === 1) return -1000;
+        return -500;
+      }))
+      .force('center', d3.forceCenter(width / 2, height / 2))
+      .force('collision', d3.forceCollide().radius(50));
+
+    // Create links
+    const link = g.append('g')
+      .selectAll('line')
+      .data(data.links)
+      .join('line')
+      .attr('class', 'link');
+
+    // Create nodes
+    const node = g.append('g')
+      .selectAll('g')
+      .data(data.nodes)
+      .join('g')
+      .attr('class', 'node')
+      .call(d3.drag()
+        .on('start', dragstarted)
+        .on('drag', dragged)
+        .on('end', dragended));
+
+    // Add circles to nodes
+    node.append('circle')
+      .attr('r', d => {
+        if (d.level === 0) return 35;
+        if (d.level === 1) return 22;
+        return 14;
+      })
+      .attr('fill', d => colors[d.category])
+      .on('mouseover', showTooltip)
+      .on('mouseout', hideTooltip)
+      .on('click', (event, d) => {
+        event.stopPropagation();
+        showInfoPanel(d);
+      });
+
+    // Add text to nodes
+    node.append('text')
+      .attr('dy', d => d.level === 0 ? 50 : d.level === 1 ? 32 : 24)
+      .attr('text-anchor', 'middle')
+      .text(d => d.name)
+      .style('font-size', d => d.level === 0 ? '13px' : d.level === 1 ? '11px' : '10px')
+      .style('font-weight', '200');
+
+    // Update positions on tick
+    simulation.on('tick', () => {
+      link
+        .attr('x1', d => d.source.x)
+        .attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x)
+        .attr('y2', d => d.target.y);
+
+      node.attr('transform', d => `translate(${d.x},${d.y})`);
+    });
+
+    // Drag functions
+    function dragstarted(event, d) {
+      if (!event.active) simulation.alphaTarget(0.3).restart();
+      d.fx = d.x;
+      d.fy = d.y;
+    }
+
+    function dragged(event, d) {
+      d.fx = event.x;
+      d.fy = event.y;
+    }
+
+    function dragended(event, d) {
+      if (!event.active) simulation.alphaTarget(0);
+      d.fx = null;
+      d.fy = null;
+    }
+
+    // Tooltip functions
+    function showTooltip(event, d) {
+      const tooltip = document.getElementById('tooltip');
+      tooltip.style.opacity = 1;
+      tooltip.style.left = (event.pageX + 10) + 'px';
+      tooltip.style.top = (event.pageY + 10) + 'px';
+      tooltip.innerHTML = `<strong>${d.name}</strong><br>Click for details`;
+    }
+
+    function hideTooltip() {
+      document.getElementById('tooltip').style.opacity = 0;
+    }
+
+    // Info panel functions
+    function showInfoPanel(d) {
+      const panel = document.getElementById('infoPanel');
+      const content = document.getElementById('infoPanelContent');
+      const info = nodeInfo[d.id];
+      
+      if (!info) return;
+      
+      let html = `<h2>${info.title}</h2>`;
+      
+      // Add status badge
+      if (info.status) {
+        html += `<span class="status ${info.status}">${info.status.toUpperCase()}</span>`;
+      }
+      
+      html += `<p>${info.description}</p>`;
+      
+      if (info.details && info.details.length > 0) {
+        html += `<h3>Key Points</h3>`;
+        html += `<ul>`;
+        info.details.forEach(detail => {
+          html += `<li>${detail}</li>`;
+        });
+        html += `</ul>`;
+      }
+      
+      if (info.keyTopics && info.keyTopics.length > 0) {
+        html += `<h3>Topics to Learn</h3>`;
+        html += `<ul>`;
+        info.keyTopics.forEach(topic => {
+          html += `<li>${topic}</li>`;
+        });
+        html += `</ul>`;
+      }
+      
+      if (info.links && info.links.length > 0) {
+        html += `<div class="links">`;
+        html += `<h3>📚 Resources</h3>`;
+        info.links.forEach(link => {
+          html += `<a href="${link.url}" target="_blank">${link.text}</a>`;
+        });
+        html += `</div>`;
+      } else {
+        html += `<div class="links">`;
+        html += `<p style="color: #999; font-size: 11px; margin-top: 15px;">📝 Resources coming soon</p>`;
+        html += `</div>`;
+      }
+      
+      content.innerHTML = html;
+      panel.classList.add('visible');
+    }
+
+    function closeInfoPanel() {
+      document.getElementById('infoPanel').classList.remove('visible');
+    }
+
+    // Close title box
+    function closeTitleBox() {
+      document.getElementById('titleBox').classList.add('hidden');
+    }
+
+    // Toggle legend drawer
+    function toggleLegend() {
+      const legend = document.getElementById('legend');
+      const toggle = document.getElementById('legendToggle');
+      legend.classList.toggle('collapsed');
+      
+      // Change arrow direction
+      if (legend.classList.contains('collapsed')) {
+        toggle.textContent = '▶';
+      } else {
+        toggle.textContent = '◀';
+      }
+    }
+
+    // Utility functions
+    function resetSimulation() {
+      simulation.alpha(1).restart();
+    }
+
+    function centerView() {
+      svg.transition()
+        .duration(750)
+        .call(zoom.transform, d3.zoomIdentity);
+    }
+
+    // Initial zoom to fit
+    setTimeout(() => {
+      svg.call(zoom.transform, d3.zoomIdentity.scale(0.6).translate(width * 0.3, height * 0.3));
+    }, 100);
+  </script>
+</body>
+</html>
