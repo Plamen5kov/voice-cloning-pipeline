@@ -45,7 +45,7 @@
       position: absolute;
       bottom: 20px;
       right: 20px;
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.2);
       padding: 15px;
       border-radius: 10px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
@@ -512,19 +512,20 @@
         { source: 12, target: 43 },
         { source: 12, target: 44 },
         
-        // Cross-domain connections (showing dependencies)
-        { source: 2, target: 3 },  // Python -> DL
-        { source: 3, target: 5 },  // DL -> Transformers
-        { source: 3, target: 8 },  // DL -> Generative AI
-        { source: 4, target: 7 },  // NLP -> TTS
-        { source: 5, target: 7 },  // Transformers -> TTS
-        { source: 6, target: 7 },  // Speech/Audio -> TTS
-        { source: 7, target: 9 },  // TTS -> Data Prep
-        { source: 9, target: 10 }, // Data Prep -> Training
-        { source: 10, target: 11 }, // Training -> MLOps
-        { source: 11, target: 12 }, // MLOps -> Cloud
-        { source: 17, target: 6 },  // Audio Handling -> Speech/Audio
-        { source: 19, target: 10 }, // PyTorch -> Training
+        // Cross-domain connections (Foundation Flow - Essential Prerequisites Only)
+        // Foundation prerequisites
+        { source: 2, target: 3 },  // Python -> Deep Learning (must learn Python first)
+        
+        // Enablement relationships (foundation enables applications)
+        { source: 3, target: 5 },  // Deep Learning -> Transformers (DL enables modern NLP)
+        { source: 3, target: 8 },  // Deep Learning -> Generative AI (DL enables generative models)
+        
+        // Domain prerequisites (specific to voice cloning)
+        { source: 4, target: 7 },  // NLP -> TTS (NLP concepts needed for TTS)
+        { source: 6, target: 7 },  // Speech/Audio -> TTS (audio processing needed for TTS)
+        
+        // Sequential workflow prerequisites
+        { source: 9, target: 10 }, // Data Preparation -> Model Training (prepared data needed for training)
       ]
     };
 
