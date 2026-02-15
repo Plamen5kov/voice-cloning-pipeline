@@ -27,7 +27,7 @@
       border-radius: 10px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
       z-index: 1000;
-      max-width: 400px;
+      max-width: 450px;
       transition: opacity 0.3s, transform 0.3s;
     }
     .title.hidden {
@@ -69,21 +69,21 @@
       position: absolute;
       bottom: 20px;
       right: 20px;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 15px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 10px;
       border-radius: 10px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
       z-index: 1000;
     }
     .controls button {
       margin: 5px;
-      padding: 8px 15px;
+      padding: 6px 12px;
       border: none;
       border-radius: 5px;
       background: #7c3aed;
       color: white;
       cursor: pointer;
-      font-size: 12px;
+      font-size: 11px;
       transition: background 0.3s;
     }
     .controls button:hover {
@@ -103,6 +103,9 @@
     }
     .legend.collapsed {
       transform: translateX(-100%);
+    }
+    .legend.collapsed .legend-toggle {
+      background: rgba(255, 255, 255, 0.2);
     }
     .legend-toggle {
       position: absolute;
@@ -288,8 +291,19 @@
 <body>
   <div class="title" id="titleBox">
     <button class="close-btn" onclick="closeTitleBox()">×</button>
-    <h1>🤖 AI Learning Path - Option 2</h1>
-    <p>Foundation Flow - Shows essential prerequisite chains (Math → ML → DL → Applications). Cleaner than full connections, keeps learning progression visible.</p>
+    <h1>🤖 AI Learning Path - Interactive Progress Tracker</h1>
+    <p style="margin-bottom: 12px;">Foundation Flow - Shows essential prerequisite chains (Math → ML → DL → Applications). Cleaner than full connections, keeps learning progression visible.</p>
+    <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px; border-left: 3px solid #7c3aed;">
+      <h3 style="margin: 0 0 8px 0; font-size: 14px; color: #7c3aed;">📊 Visual Progress System</h3>
+      <p style="margin: 5px 0; font-size: 12px; line-height: 1.6;">
+        <strong>Node brightness reflects actual work completed:</strong><br>
+        • <span style="opacity: 0.2; filter: grayscale(60%);">⚫ Gray & faded (20%)</span> = No files yet (not started)<br>
+        • <span style="opacity: 0.5;">⚫ Dimmer (30-60%)</span> = A few files (just started)<br>
+        • <span style="opacity: 0.8;">⚫ Brighter (60-85%)</span> = Many files (good progress)<br>
+        • <span style="opacity: 1.0;">⚫ Vibrant (100%)</span> = Lots of files (substantial work)<br>
+        <em style="font-size: 11px; color: #999;">Opacity scales based on Python/notebook files in each directory</em>
+      </p>
+    </div>
   </div>
   
   <div class="legend collapsed" id="legend">
@@ -306,6 +320,12 @@
       <div class="legend-item"><div class="legend-color" style="background: #6366f1;"></div>Tools & Systems</div>
       <div class="legend-item"><div class="legend-color" style="background: #a855f7;"></div>Research & Advanced</div>
       <div class="legend-item"><div class="legend-color" style="background: #64748b;"></div>Ethics & Safety</div>
+      <hr style="border: none; border-top: 1px solid #ddd; margin: 12px 0;">
+      <h3 style="margin-top: 10px;">Progress (by file count)</h3>
+      <div class="legend-item"><div class="legend-color" style="background: #3b82f6; opacity: 0.2; filter: grayscale(60%);"></div>No files (20%)</div>
+      <div class="legend-item"><div class="legend-color" style="background: #8b5cf6; opacity: 0.5;"></div>Some files (50%)</div>
+      <div class="legend-item"><div class="legend-color" style="background: #ec4899; opacity: 0.8;"></div>Many files (80%)</div>
+      <div class="legend-item"><div class="legend-color" style="background: #10b981; opacity: 1.0;"></div>Full (100%)</div>
     </div>
   </div>
   
@@ -364,7 +384,7 @@
         details: ["Foundation of modern AI", "Powers computer vision, NLP, and more", "Requires GPU acceleration"],
         keyTopics: ["Neural Networks", "CNNs", "RNNs", "Transformers"],
         links: [
-          { text: "Deep Learning Basics", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/02_deep_learning_basics/" }
+          { text: "Deep Learning", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/03_deep_learning/" }
         ]
       },
       
@@ -387,7 +407,7 @@
         keyTopics: ["Tokenization", "Embeddings", "Transformers", "LLMs"],
         links: [
           { text: "NLP Module", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/05_nlp/" },
-          { text: "Transformers", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/06_hf_transformers/" }
+          { text: "Hugging Face Transformers", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/07_tools_frameworks/hugging_face/" }
         ]
       },
       
@@ -409,8 +429,8 @@
         details: ["PyTorch and TensorFlow", "Hugging Face ecosystem", "Development environments", "Version control"],
         keyTopics: ["PyTorch", "TensorFlow", "Hugging Face", "MLOps"],
         links: [
-          { text: "Environment Setup", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/00_env_setup/" },
-          { text: "Python Programming", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/01_python_programming/" }
+          { text: "Environment Setup", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/00_foundations/environment_setup/" },
+          { text: "Python Basics", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/07_tools_frameworks/python_basics/" }
         ]
       },
       
@@ -422,7 +442,7 @@
         details: ["Data collection and cleaning", "Feature engineering", "Data pipelines", "Storage and databases"],
         keyTopics: ["Data Preprocessing", "Feature Engineering", "Pipelines"],
         links: [
-          { text: "Data Preparation", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/07_data_preparation/" }
+          { text: "Data Engineering", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/08_data_engineering/data_preprocessing/" }
         ]
       },
       
@@ -504,7 +524,7 @@
         details: ["Feature extraction", "Feature selection", "Feature scaling", "Domain-specific features"],
         keyTopics: ["Extraction", "Selection", "Transformation"],
         links: [
-          { text: "Data Preparation", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/07_data_preparation/" }
+          { text: "Data Engineering", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/08_data_engineering/data_preprocessing/" }
         ]
       },
       18: {
@@ -532,7 +552,7 @@
         details: ["Perceptrons and multilayer networks", "Activation functions", "Forward and backward propagation", "Weight initialization"],
         keyTopics: ["Perceptrons", "Backpropagation", "Activations"],
         links: [
-          { text: "Deep Learning Basics", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/02_deep_learning_basics/" }
+          { text: "Neural Networks", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/03_deep_learning/neural_networks/" }
         ]
       },
       21: {
@@ -558,7 +578,7 @@
         details: ["Self-attention mechanism", "Multi-head attention", "Positional encoding", "BERT, GPT, T5 architectures"],
         keyTopics: ["Attention", "BERT", "GPT", "Positional Encoding"],
         links: [
-          { text: "Transformers Module", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/06_hf_transformers/" }
+          { text: "Hugging Face Transformers", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/07_tools_frameworks/hugging_face/" }
         ]
       },
       24: {
@@ -568,7 +588,7 @@
         details: ["GANs (Generative Adversarial Networks)", "VAEs (Variational Autoencoders)", "Diffusion models", "Text-to-image generation"],
         keyTopics: ["GANs", "VAEs", "Diffusion", "Stable Diffusion"],
         links: [
-          { text: "Generative AI", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/09_generative_ai/" }
+          { text: "Generative Models", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/03_deep_learning/generative_models/" }
         ]
       },
       25: {
@@ -578,7 +598,7 @@
         details: ["Gradient descent variants", "SGD, Adam, RMSprop", "Learning rate scheduling", "Batch normalization"],
         keyTopics: ["SGD", "Adam", "Learning Rate", "BatchNorm"],
         links: [
-          { text: "Optimization Lab", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/02_deep_learning_basics/08_lab_optimization/" }
+          { text: "Optimization Lab", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/03_deep_learning/optimization/08_lab_optimization/" }
         ]
       },
       26: {
@@ -588,7 +608,7 @@
         details: ["L1/L2 regularization", "Dropout", "Early stopping", "Data augmentation"],
         keyTopics: ["Dropout", "L2 Regularization", "Data Augmentation"],
         links: [
-          { text: "Regularization Lab", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/02_deep_learning_basics/06_lab_regularization/" }
+          { text: "Regularization Lab", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/03_deep_learning/regularization/06_lab_regularization/" }
         ]
       },
       
@@ -652,7 +672,7 @@
         details: ["GPT family (GPT-3, GPT-4)", "BERT and variants", "T5 and BART", "Instruction tuning"],
         keyTopics: ["GPT", "BERT", "Fine-tuning", "Prompting"],
         links: [
-          { text: "Transformers", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/06_hf_transformers/" }
+          { text: "Hugging Face Transformers", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/07_tools_frameworks/hugging_face/" }
         ]
       },
       34: {
@@ -662,8 +682,8 @@
         details: ["Speech recognition (ASR)", "Text-to-speech (TTS)", "Speaker recognition", "Audio feature extraction"],
         keyTopics: ["ASR", "TTS", "Voice Cloning", "Audio Features"],
         links: [
-          { text: "Speech Processing", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/04_speech_audio_processing/" },
-          { text: "TTS Systems", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/03_tts_systems/" }
+          { text: "Speech & Audio Processing", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/05_nlp/speech_audio/" },
+          { text: "TTS Systems", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/05_nlp/speech_audio/tts/" }
         ]
       },
       35: {
@@ -725,7 +745,7 @@
         details: ["Tensor operations", "Autograd", "nn.Module", "Dynamic computational graphs"],
         keyTopics: ["Tensors", "Autograd", "Training Loops"],
         links: [
-          { text: "PyTorch Basics", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/master/02_deep_learning_basics/01_hello_pytorch.py" }
+          { text: "PyTorch Basics", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/blob/master/03_deep_learning/neural_networks/01_hello_pytorch.py" }
         ]
       },
       42: {
@@ -735,7 +755,7 @@
         details: ["TensorFlow 2.x", "Keras high-level API", "TensorFlow Lite for mobile", "TensorFlow Serving"],
         keyTopics: ["Keras", "TF Serving", "Graph Mode"],
         links: [
-          { text: "TensorFlow Intro", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/02_deep_learning_basics/09_lab_tensorflow_intro/" }
+          { text: "TensorFlow Intro", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/07_tools_frameworks/tensorflow/09_lab_tensorflow_intro/" }
         ]
       },
       43: {
@@ -745,7 +765,7 @@
         details: ["Transformers library", "Datasets library", "Model Hub", "Spaces for demos"],
         keyTopics: ["Model Hub", "Pipeline API", "Datasets"],
         links: [
-          { text: "Transformers Module", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/06_hf_transformers/" }
+          { text: "Hugging Face Transformers", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/07_tools_frameworks/hugging_face/" }
         ]
       },
       44: {
@@ -755,7 +775,7 @@
         details: ["MLflow for tracking", "Docker for containerization", "Kubernetes for orchestration", "CI/CD pipelines"],
         keyTopics: ["MLflow", "Docker", "Kubernetes", "CI/CD"],
         links: [
-          { text: "MLOps Module", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/10_mlops/" }
+          { text: "MLOps Tools", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/07_tools_frameworks/mlops_tools/" }
         ]
       },
       45: {
@@ -765,7 +785,7 @@
         details: ["AWS SageMaker", "Google Cloud AI", "Azure ML", "GPU instances"],
         keyTopics: ["AWS", "GCP", "Azure", "GPU Instances"],
         links: [
-          { text: "Cloud Platforms", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/11_cloud_platforms/" }
+          { text: "Cloud Platforms", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/07_tools_frameworks/cloud_platforms/" }
         ]
       },
       46: {
@@ -775,7 +795,7 @@
         details: ["Jupyter notebooks", "Git version control", "Virtual environments", "Python packaging"],
         keyTopics: ["Jupyter", "Git", "conda/venv"],
         links: [
-          { text: "Environment Setup", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/00_env_setup/" }
+          { text: "Environment Setup", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/00_foundations/environment_setup/" }
         ]
       },
       
@@ -795,7 +815,7 @@
         details: ["Missing value handling", "Outlier detection", "Normalization and scaling", "Data validation"],
         keyTopics: ["Cleaning", "Normalization", "Validation"],
         links: [
-          { text: "Data Preparation", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/07_data_preparation/" }
+          { text: "Data Preprocessing", url: "https://github.com/Plamen5kov/voice-cloning-pipeline/tree/master/08_data_engineering/data_preprocessing/" }
         ]
       },
       49: {
@@ -892,92 +912,100 @@
       }
     };
 
+    // Function to calculate opacity based on file count (0 files = 20%, scales up to 100%)
+    function getOpacity(fileCount) {
+      if (fileCount === 0) return 0.2;
+      // Scale: 1-5 files: 30-50%, 6-15: 60-80%, 16+: 85-100%
+      const normalized = Math.min(fileCount / 40, 1); // 40 files = max brightness
+      return 0.2 + (normalized * 0.8); // Range from 20% to 100%
+    }
+
     // Data structure
     const data = {
       nodes: [
-        // Center (0)
-        { id: 0, name: "Artificial Intelligence", level: 0, category: "core" },
+        // Center (0) - always full opacity
+        { id: 0, name: "Artificial Intelligence", level: 0, category: "core", fileCount: 100 },
         
-        // Level 1 - Main areas (1-10)
-        { id: 1, name: "Mathematics", level: 1, category: "math" },
-        { id: 2, name: "Machine Learning", level: 1, category: "ml" },
-        { id: 3, name: "Deep Learning", level: 1, category: "dl" },
-        { id: 4, name: "Computer Vision", level: 1, category: "cv" },
-        { id: 5, name: "NLP", level: 1, category: "nlp" },
-        { id: 6, name: "Reinforcement Learning", level: 1, category: "rl" },
-        { id: 7, name: "Tools & Frameworks", level: 1, category: "tools" },
-        { id: 8, name: "Data Engineering", level: 1, category: "tools" },
-        { id: 9, name: "Research & Advanced", level: 1, category: "research" },
-        { id: 10, name: "AI Ethics", level: 1, category: "ethics" },
+        // Level 1 - Main areas (1-10) with actual file counts
+        { id: 1, name: "Mathematics", level: 1, category: "math", fileCount: 0 },
+        { id: 2, name: "Machine Learning", level: 1, category: "ml", fileCount: 7 },
+        { id: 3, name: "Deep Learning", level: 1, category: "dl", fileCount: 79 },
+        { id: 4, name: "Computer Vision", level: 1, category: "cv", fileCount: 0 },
+        { id: 5, name: "NLP", level: 1, category: "nlp", fileCount: 9 },
+        { id: 6, name: "Reinforcement Learning", level: 1, category: "rl", fileCount: 0 },
+        { id: 7, name: "Tools & Frameworks", level: 1, category: "tools", fileCount: 17 },
+        { id: 8, name: "Data Engineering", level: 1, category: "tools", fileCount: 2 },
+        { id: 9, name: "Research & Advanced", level: 1, category: "research", fileCount: 0 },
+        { id: 10, name: "AI Ethics", level: 1, category: "ethics", fileCount: 0 },
         
         // Level 2 - Mathematics (11-14)
-        { id: 11, name: "Linear Algebra", level: 2, category: "math" },
-        { id: 12, name: "Calculus", level: 2, category: "math" },
-        { id: 13, name: "Probability & Stats", level: 2, category: "math" },
-        { id: 14, name: "Information Theory", level: 2, category: "math" },
+        { id: 11, name: "Linear Algebra", level: 2, category: "math", fileCount: 0 },
+        { id: 12, name: "Calculus", level: 2, category: "math", fileCount: 0 },
+        { id: 13, name: "Probability & Stats", level: 2, category: "math", fileCount: 0 },
+        { id: 14, name: "Information Theory", level: 2, category: "math", fileCount: 0 },
         
         // Level 2 - Machine Learning (15-19)
-        { id: 15, name: "Supervised Learning", level: 2, category: "ml" },
-        { id: 16, name: "Unsupervised Learning", level: 2, category: "ml" },
-        { id: 17, name: "Feature Engineering", level: 2, category: "ml" },
-        { id: 18, name: "Model Evaluation", level: 2, category: "ml" },
-        { id: 19, name: "Ensemble Methods", level: 2, category: "ml" },
+        { id: 15, name: "Supervised Learning", level: 2, category: "ml", fileCount: 7 },
+        { id: 16, name: "Unsupervised Learning", level: 2, category: "ml", fileCount: 0 },
+        { id: 17, name: "Feature Engineering", level: 2, category: "ml", fileCount: 0 },
+        { id: 18, name: "Model Evaluation", level: 2, category: "ml", fileCount: 0 },
+        { id: 19, name: "Ensemble Methods", level: 2, category: "ml", fileCount: 0 },
         
         // Level 2 - Deep Learning (20-26)
-        { id: 20, name: "Neural Networks", level: 2, category: "dl" },
-        { id: 21, name: "CNNs", level: 2, category: "dl" },
-        { id: 22, name: "RNNs", level: 2, category: "dl" },
-        { id: 23, name: "Transformers", level: 2, category: "dl" },
-        { id: 24, name: "Generative Models", level: 2, category: "dl" },
-        { id: 25, name: "Optimization", level: 2, category: "dl" },
-        { id: 26, name: "Regularization", level: 2, category: "dl" },
+        { id: 20, name: "Neural Networks", level: 2, category: "dl", fileCount: 39 },
+        { id: 21, name: "CNNs", level: 2, category: "dl", fileCount: 0 },
+        { id: 22, name: "RNNs", level: 2, category: "dl", fileCount: 0 },
+        { id: 23, name: "Transformers", level: 2, category: "dl", fileCount: 0 },
+        { id: 24, name: "Generative Models", level: 2, category: "dl", fileCount: 0 },
+        { id: 25, name: "Optimization", level: 2, category: "dl", fileCount: 33 },
+        { id: 26, name: "Regularization", level: 2, category: "dl", fileCount: 7 },
         
         // Level 2 - Computer Vision (27-30)
-        { id: 27, name: "Image Classification", level: 2, category: "cv" },
-        { id: 28, name: "Object Detection", level: 2, category: "cv" },
-        { id: 29, name: "Segmentation", level: 2, category: "cv" },
-        { id: 30, name: "Face Recognition", level: 2, category: "cv" },
+        { id: 27, name: "Image Classification", level: 2, category: "cv", fileCount: 0 },
+        { id: 28, name: "Object Detection", level: 2, category: "cv", fileCount: 0 },
+        { id: 29, name: "Segmentation", level: 2, category: "cv", fileCount: 0 },
+        { id: 30, name: "Face Recognition", level: 2, category: "cv", fileCount: 0 },
         
         // Level 2 - NLP (31-36)
-        { id: 31, name: "Text Processing", level: 2, category: "nlp" },
-        { id: 32, name: "Word Embeddings", level: 2, category: "nlp" },
-        { id: 33, name: "Language Models", level: 2, category: "nlp" },
-        { id: 34, name: "Speech & Audio", level: 2, category: "nlp" },
-        { id: 35, name: "Question Answering", level: 2, category: "nlp" },
-        { id: 36, name: "Translation", level: 2, category: "nlp" },
+        { id: 31, name: "Text Processing", level: 2, category: "nlp", fileCount: 0 },
+        { id: 32, name: "Word Embeddings", level: 2, category: "nlp", fileCount: 0 },
+        { id: 33, name: "Language Models", level: 2, category: "nlp", fileCount: 0 },
+        { id: 34, name: "Speech & Audio", level: 2, category: "nlp", fileCount: 9 },
+        { id: 35, name: "Question Answering", level: 2, category: "nlp", fileCount: 0 },
+        { id: 36, name: "Translation", level: 2, category: "nlp", fileCount: 0 },
         
         // Level 2 - RL (37-40)
-        { id: 37, name: "MDPs", level: 2, category: "rl" },
-        { id: 38, name: "Q-Learning & DQN", level: 2, category: "rl" },
-        { id: 39, name: "Policy Gradients", level: 2, category: "rl" },
-        { id: 40, name: "RLHF", level: 2, category: "rl" },
+        { id: 37, name: "MDPs", level: 2, category: "rl", fileCount: 0 },
+        { id: 38, name: "Q-Learning & DQN", level: 2, category: "rl", fileCount: 0 },
+        { id: 39, name: "Policy Gradients", level: 2, category: "rl", fileCount: 0 },
+        { id: 40, name: "RLHF", level: 2, category: "rl", fileCount: 0 },
         
         // Level 2 - Tools (41-46)
-        { id: 41, name: "PyTorch", level: 2, category: "tools" },
-        { id: 42, name: "TensorFlow", level: 2, category: "tools" },
-        { id: 43, name: "Hugging Face", level: 2, category: "tools" },
-        { id: 44, name: "MLOps Tools", level: 2, category: "tools" },
-        { id: 45, name: "Cloud Platforms", level: 2, category: "tools" },
-        { id: 46, name: "Dev Tools", level: 2, category: "tools" },
+        { id: 41, name: "PyTorch", level: 2, category: "tools", fileCount: 1 },
+        { id: 42, name: "TensorFlow", level: 2, category: "tools", fileCount: 9 },
+        { id: 43, name: "Hugging Face", level: 2, category: "tools", fileCount: 0 },
+        { id: 44, name: "MLOps Tools", level: 2, category: "tools", fileCount: 0 },
+        { id: 45, name: "Cloud Platforms", level: 2, category: "tools", fileCount: 0 },
+        { id: 46, name: "Dev Tools", level: 2, category: "tools", fileCount: 7 },
         
         // Level 2 - Data Engineering (47-50)
-        { id: 47, name: "Data Collection", level: 2, category: "tools" },
-        { id: 48, name: "Data Preprocessing", level: 2, category: "tools" },
-        { id: 49, name: "Data Pipelines", level: 2, category: "tools" },
-        { id: 50, name: "Data Storage", level: 2, category: "tools" },
+        { id: 47, name: "Data Collection", level: 2, category: "tools", fileCount: 0 },
+        { id: 48, name: "Data Preprocessing", level: 2, category: "tools", fileCount: 2 },
+        { id: 49, name: "Data Pipelines", level: 2, category: "tools", fileCount: 0 },
+        { id: 50, name: "Data Storage", level: 2, category: "tools", fileCount: 0 },
         
         // Level 2 - Research (51-55)
-        { id: 51, name: "Meta-Learning", level: 2, category: "research" },
-        { id: 52, name: "Neural Architecture Search", level: 2, category: "research" },
-        { id: 53, name: "Multimodal AI", level: 2, category: "research" },
-        { id: 54, name: "Continual Learning", level: 2, category: "research" },
-        { id: 55, name: "Interpretability", level: 2, category: "research" },
+        { id: 51, name: "Meta-Learning", level: 2, category: "research", fileCount: 0 },
+        { id: 52, name: "Neural Architecture Search", level: 2, category: "research", fileCount: 0 },
+        { id: 53, name: "Multimodal AI", level: 2, category: "research", fileCount: 0 },
+        { id: 54, name: "Continual Learning", level: 2, category: "research", fileCount: 0 },
+        { id: 55, name: "Interpretability", level: 2, category: "research", fileCount: 0 },
         
         // Level 2 - Ethics (56-59)
-        { id: 56, name: "Fairness & Bias", level: 2, category: "ethics" },
-        { id: 57, name: "Privacy & Security", level: 2, category: "ethics" },
-        { id: 58, name: "AI Alignment", level: 2, category: "ethics" },
-        { id: 59, name: "Responsible AI", level: 2, category: "ethics" }
+        { id: 56, name: "Fairness & Bias", level: 2, category: "ethics", fileCount: 0 },
+        { id: 57, name: "Privacy & Security", level: 2, category: "ethics", fileCount: 0 },
+        { id: 58, name: "AI Alignment", level: 2, category: "ethics", fileCount: 0 },
+        { id: 59, name: "Responsible AI", level: 2, category: "ethics", fileCount: 0 }
       ],
       links: [
         // Core to Level 1
@@ -1147,6 +1175,8 @@
         return 14;
       })
       .attr('fill', d => colors[d.category])
+      .attr('opacity', d => getOpacity(d.fileCount))
+      .attr('filter', d => d.fileCount === 0 ? 'grayscale(60%)' : 'none')
       .on('mouseover', showTooltip)
       .on('mouseout', hideTooltip)
       .on('click', (event, d) => {
@@ -1160,7 +1190,8 @@
       .attr('text-anchor', 'middle')
       .text(d => d.name)
       .style('font-size', d => d.level === 0 ? '13px' : d.level === 1 ? '11px' : '10px')
-      .style('font-weight', '200');
+      .style('font-weight', '200')
+      .style('opacity', d => Math.max(getOpacity(d.fileCount), 0.4));
 
     // Update positions on tick
     simulation.on('tick', () => {
