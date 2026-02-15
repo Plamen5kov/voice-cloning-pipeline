@@ -37,6 +37,10 @@ Each folder contains a comprehensive learning guide. Follow them sequentially or
 ### Repository Structure
 ```
 voice-cloning-pipeline/
+├── ai_mind_map/               # 🗺️ Interactive learning mindmap & navigation
+│   ├── ai_learning_mindmap.html   # Visual mindmap (open in browser)
+│   ├── LEARNING_PATHS.md          # 5 customized learning paths
+│   └── README.md                  # Guide to these resources
 ├── 00_env_setup/              # Initial environment setup
 ├── 01_python_programming/     # Python basics & utilities
 ├── 02_deep_learning_basics/   # PyTorch, neural networks, training loops ⭐
@@ -60,6 +64,23 @@ voice-cloning-pipeline/
 ```
 
 **Total Estimated Time**: 100-150 hours + capstone (7 weeks)
+
+---
+
+## 🗺️ Interactive Learning Map & Navigation
+
+**New!** Explore the complete curriculum with our interactive AI learning mindmap:
+
+- **[🎨 Interactive Mindmap](ai_mind_map/ai_learning_mindmap.html)** - Visual, expandable learning map (open in browser)
+- **[📚 5 Learning Paths](ai_mind_map/LEARNING_PATHS.md)** - Choose the right path for your background:
+  - Complete Beginner (20-25 weeks)
+  - Python Developer → ML Engineer (12-15 weeks)
+  - ML Practitioner → Voice AI (8-10 weeks)
+  - TTS Expert → Production (6-8 weeks)
+  - Weekend Warrior Part-Time (6 months)
+- **[📖 Full Documentation](ai_mind_map/)** - Mindmap structure, reorganization proposals, and guides
+
+**Choose your path instead of guessing where to start!**
 
 ---
 
