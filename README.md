@@ -38,9 +38,10 @@ Each folder contains a comprehensive learning guide. Follow them sequentially or
 ```
 voice-cloning-pipeline/
 ├── ai_mind_map/               # 🗺️ Interactive learning mindmap & navigation
-│   ├── ai_learning_mindmap.html   # Visual mindmap (open in browser)
-│   ├── LEARNING_PATHS.md          # 5 customized learning paths
-│   └── README.md                  # Guide to these resources
+│   ├── AI_LEARNING_MINDMAP_MERMAID.md # Visual map (renders on GitHub!)
+│   ├── ai_learning_mindmap.html       # Interactive HTML version
+│   ├── LEARNING_PATHS.md              # 5 customized learning paths
+│   └── README.md                      # Guide to these resources
 ├── 00_env_setup/              # Initial environment setup
 ├── 01_python_programming/     # Python basics & utilities
 ├── 02_deep_learning_basics/   # PyTorch, neural networks, training loops ⭐
@@ -71,7 +72,8 @@ voice-cloning-pipeline/
 
 **New!** Explore the complete curriculum with our interactive AI learning mindmap:
 
-- **[🎨 Interactive Mindmap](ai_mind_map/ai_learning_mindmap.html)** - Visual, expandable learning map (open in browser)
+- **[🗺️ Visual Mindmap (GitHub)](ai_mind_map/AI_LEARNING_MINDMAP_MERMAID.md)** - Renders directly on GitHub! ⭐
+- **[🎨 Interactive HTML](ai_mind_map/ai_learning_mindmap.html)** - Download and open in browser for full interactivity
 - **[📚 5 Learning Paths](ai_mind_map/LEARNING_PATHS.md)** - Choose the right path for your background:
   - Complete Beginner (20-25 weeks)
   - Python Developer → ML Engineer (12-15 weeks)

@@ -6,12 +6,21 @@ This folder contains comprehensive learning navigation resources for the Voice C
 
 ## 📁 Files in This Folder
 
-### 🗺️ Interactive Mindmap
+### 🗺️ Interactive Mindmap (3 Formats!)
+
+#### 1. GitHub-Native Version ⭐ NEW!
+**[AI_LEARNING_MINDMAP_MERMAID.md](AI_LEARNING_MINDMAP_MERMAID.md)**
+- ✅ **Renders directly on GitHub** using Mermaid diagrams
+- No need to download or open in browser
+- Perfect for quick viewing in the repository
+- **View this first on GitHub!**
+
+#### 2. Interactive HTML Version
 **[ai_learning_mindmap.html](ai_learning_mindmap.html)**
-- Open in any web browser for an interactive, visual learning map
+- Full interactive, zoomable mindmap
 - Color-coded by learning tier (Foundation → Core ML → Domain AI → Production)
 - Expandable/collapsible nodes showing the complete curriculum
-- **Start here** for a birds-eye view of the entire learning path
+- Best for deep exploration and navigation
 
 **How to use:**
 ```bash
@@ -21,12 +30,11 @@ open ai_learning_mindmap.html          # macOS
 start ai_learning_mindmap.html         # Windows
 ```
 
-### 📊 Mindmap (Markdown Version)
+#### 3. Markdown Outline
 **[AI_LEARNING_MINDMAP.md](AI_LEARNING_MINDMAP.md)**
-- Complete hierarchical structure in Markdown format
-- Same content as HTML version, but text-based
-- All 8 major learning branches with detailed subtopics
-- Great for reference and searching
+- Complete hierarchical structure in Markdown
+- All details and subtopics
+- Great for searching and reference
 
 ---
 
@@ -75,9 +83,15 @@ start ai_learning_mindmap.html         # Windows
 ## 🎯 Quick Start
 
 ### For Learners:
-1. **View the mindmap**: Open [ai_learning_mindmap.html](ai_learning_mindmap.html) in your browser
-2. **Choose your path**: Read [LEARNING_PATHS.md](LEARNING_PATHS.md) to find the right learning sequence
+
+**On GitHub:**
+1. **View the mindmap**: Open [AI_LEARNING_MINDMAP_MERMAID.md](AI_LEARNING_MINDMAP_MERMAID.md) - it renders automatically!
+2. **Choose your path**: Read [LEARNING_PATHS.md](LEARNING_PATHS.md)
 3. **Start learning**: Navigate to the appropriate module in the parent directory
+
+**For Local/Detailed Exploration:**
+1. Download and open [ai_learning_mindmap.html](ai_learning_mindmap.html) in your browser for the full interactive experience
+2. Use the reference docs as needed
 
 ### For Instructors:
 1. **Review structure**: Check [PROPOSED_REORGANIZATION.md](PROPOSED_REORGANIZATION.md)
@@ -131,11 +145,16 @@ See the interactive mindmap for the complete breakdown!
 
 ## 💡 Recommended Reading Order
 
-1. **[ai_learning_mindmap.html](ai_learning_mindmap.html)** - Get the big picture
+**If viewing on GitHub:**
+1. **[AI_LEARNING_MINDMAP_MERMAID.md](AI_LEARNING_MINDMAP_MERMAID.md)** - See the visual map (renders automatically)
 2. **[LEARNING_PATHS.md](LEARNING_PATHS.md)** - Find your path
 3. **[IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md)** - Understand the resources
-4. **[AI_LEARNING_MINDMAP.md](AI_LEARNING_MINDMAP.md)** - Reference as needed
-5. **[PROPOSED_REORGANIZATION.md](PROPOSED_REORGANIZATION.md)** - If you're maintaining the repo
+
+**If viewing locally:**
+1. **[ai_learning_mindmap.html](ai_learning_mindmap.html)** - Interactive exploration (best experience)
+2. **[LEARNING_PATHS.md](LEARNING_PATHS.md)** - Find your path
+3. **[AI_LEARNING_MINDMAP.md](AI_LEARNING_MINDMAP.md)** - Reference as needed
+4. **[PROPOSED_REORGANIZATION.md](PROPOSED_REORGANIZATION.md)** - If maintaining the repo
 
 ---
 
@@ -153,13 +172,14 @@ The interactive HTML mindmap includes:
 
 ## 📝 File Sizes
 
+- `AI_LEARNING_MINDMAP_MERMAID.md`: ~8 KB (GitHub-friendly Mermaid version)
 - `ai_learning_mindmap.html`: ~35 KB (interactive visualization)
 - `AI_LEARNING_MINDMAP.md`: ~15 KB (markdown structure)
 - `LEARNING_PATHS.md`: ~25 KB (5 paths with details)
 - `PROPOSED_REORGANIZATION.md`: ~30 KB (comprehensive analysis)
 - `IMPLEMENTATION_GUIDE.md`: ~10 KB (quick start guide)
 
-Total: ~115 KB of valuable navigation resources
+Total: ~123 KB of valuable navigation resources
 
 ---
 
