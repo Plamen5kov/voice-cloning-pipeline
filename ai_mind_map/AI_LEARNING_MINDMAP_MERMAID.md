@@ -7,6 +7,7 @@ This mindmap renders directly on GitHub using Mermaid diagrams.
 ## 🗺️ Complete Learning Mindmap
 
 ```mermaid
+%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#4a90e2', 'primaryTextColor':'#fff', 'primaryBorderColor':'#2e5c8a', 'lineColor':'#6c757d', 'secondaryColor':'#50C878', 'tertiaryColor':'#FFB347', 'fontSize':'14px'}}}%%
 mindmap
   root((AI Learning Path))
     Foundation
