@@ -43,8 +43,8 @@
   <svg id="mindmap"></svg>
   
   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-  <script src="https://cdn.jsdelivr.net/npm/markmap-view@0.15.0"></script>
-  <script src="https://cdn.jsdelivr.net/npm/markmap-lib@0.15.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/markmap-view"></script>
+  <script src="https://cdn.jsdelivr.net/npm/markmap-lib"></script>
   
   <script>
     const markdown = `# AI Learning Path: Voice Cloning Pipeline
@@ -509,37 +509,45 @@
 - Responsible AI deployment
 `;
 
-    // Parse markdown
-    const { Transformer } = window.markmap;
-    const transformer = new Transformer();
-    const { root, features } = transformer.transform(markdown);
+    // Wait for the markmap libraries to load
+    async function initMarkmap() {
+      // Parse markdown
+      const transformer = new markmap.Transformer();
+      const { root, features } = transformer.transform(markdown);
+      
+      // Load required assets
+      const { styles, scripts } = transformer.getUsedAssets(features);
+      if (styles) markmap.loadCSS(styles);
+      if (scripts) await markmap.loadJS(scripts, { getMarkmap: () => markmap });
+      
+      // Render mindmap
+      markmap.Markmap.create('#mindmap', {
+        duration: 500,
+        maxWidth: 300,
+        color: (node) => {
+          // Color scheme for different levels
+          const colors = [
+            '#FF6B6B', // Foundation - Red
+            '#4ECDC4', // Core ML - Teal
+            '#45B7D1', // Domain Specific - Blue
+            '#96CEB4', // Data Engineering - Green
+            '#FFEAA7', // Production - Yellow
+            '#DDA15E', // Integration - Orange
+            '#BC6C25', // Advanced - Brown
+            '#A8DADC'  // Professional - Light Blue
+          ];
+          const depth = node.state.depth;
+          return colors[depth % colors.length];
+        }
+      }, root);
+    }
     
-    // Render mindmap
-    const { Markmap, loadCSS, loadJS } = window.markmap;
-    const { styles, scripts } = transformer.getUsedAssets(features);
-    
-    if (styles) loadCSS(styles);
-    if (scripts) loadJS(scripts, { getMarkmap: () => window.markmap });
-    
-    Markmap.create('#mindmap', {
-      duration: 500,
-      maxWidth: 300,
-      color: (node) => {
-        // Color scheme for different levels
-        const colors = [
-          '#FF6B6B', // Foundation - Red
-          '#4ECDC4', // Core ML - Teal
-          '#45B7D1', // Domain Specific - Blue
-          '#96CEB4', // Data Engineering - Green
-          '#FFEAA7', // Production - Yellow
-          '#DDA15E', // Integration - Orange
-          '#BC6C25', // Advanced - Brown
-          '#A8DADC'  // Professional - Light Blue
-        ];
-        const depth = node.state.depth;
-        return colors[depth % colors.length];
-      }
-    }, root);
+    // Initialize when the page loads
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initMarkmap);
+    } else {
+      initMarkmap();
+    }
   </script>
 </body>
 </html>
