@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice Cloning Pipeline - AI Learning Path</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 900px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      padding: 50px;
+    }
+    
+    h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      color: #333;
+      text-align: center;
+    }
+    
+    .subtitle {
+      font-size: 18px;
+      color: #666;
+      text-align: center;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+    
+    .visualizations {
+      display: grid;
+      gap: 20px;
+      margin-top: 40px;
+    }
+    
+    .viz-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 15px;
+      padding: 30px;
+      color: white;
+      text-decoration: none;
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: block;
+    }
+    
+    .viz-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .viz-card h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .viz-card p {
+      font-size: 14px;
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+    
+    .viz-card .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.3);
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 11px;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+    
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      color: #999;
+      font-size: 14px;
+    }
+    
+    .footer a {
+      color: #667eea;
+      text-decoration: none;
+    }
+    
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    
+    .icon {
+      font-size: 32px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎓 AI Learning Path</h1>
+    <p class="subtitle">
+      Interactive visualizations for mastering AI and building production-ready voice cloning systems.
+      Explore the complete learning journey from foundations to deployment.
+    </p>
+    
+    <div class="visualizations">
+      <a href="ai_mind_map/ai_complete_learning_path.html" class="viz-card">
+        <h2><span class="icon">🤖</span> Complete AI Learning Path</h2>
+        <p>
+          Comprehensive roadmap covering all AI fundamentals: Mathematics, Machine Learning, 
+          Deep Learning, Computer Vision, NLP, Reinforcement Learning, and more. 
+          60+ nodes with detailed information and learning resources.
+        </p>
+        <span class="badge">RECOMMENDED</span>
+      </a>
+      
+      <a href="ai_mind_map/ai_learning_mindmap_graph.html" class="viz-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <h2><span class="icon">🎙️</span> Voice Cloning Pipeline</h2>
+        <p>
+          Focused learning path for voice cloning and TTS systems. Covers the complete pipeline: 
+          environment setup, Python, deep learning, audio processing, TTS architectures, 
+          data preparation, training, and deployment.
+        </p>
+        <span class="badge">PROJECT-FOCUSED</span>
+      </a>
+      
+      <a href="ai_mind_map/ai_learning_mindmap.html" class="viz-card" style="background: linear-gradient(135deg, #FC466B 0%, #3F5EFB 100%);">
+        <h2><span class="icon">🌳</span> Mindmap View</h2>
+        <p>
+          Traditional tree-based mindmap visualization of the Voice Cloning Pipeline. 
+          Hierarchical view for understanding the structure and dependencies.
+        </p>
+        <span class="badge">TREE LAYOUT</span>
+      </a>
+    </div>
+    
+    <div class="footer">
+      <p>
+        Built with ❤️ using D3.js | 
+        <a href="https://github.com/Plamen5kov/voice-cloning-pipeline" target="_blank">View on GitHub</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>
