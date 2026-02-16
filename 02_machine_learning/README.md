@@ -19,12 +19,14 @@ Based on the [AI Learning Path visualization](../ai_mind_map/ai_complete_learnin
 
 ## Current Status
 - ✅ **Completed:** Supervised learning (logistic regression lab)
-- 📋 **Planned:** Unsupervised learning, ensemble methods
+- 📋 **In Progress:** Model evaluation strategies
+- 📋 **Planned:** Unsupervised learning, feature engineering, ensemble methods
 
 ## Contents
 - `supervised_learning/` - Logistic regression and classification labs
-- `feature_engineering/` - Placeholder for future work
-- `model_evaluation/` - Placeholder for future work
+- `model_evaluation/` - Evaluation metrics, train/dev/test strategy, error analysis
+- `feature_engineering/` - Planned
+- `ensemble_methods/` - Planned
 
 ## Related Topics
 - Connects to: [Deep Learning](../03_deep_learning/) - builds upon ML foundations
