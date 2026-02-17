@@ -35,6 +35,12 @@ Strategies and techniques for evaluating machine learning models, designing prop
 - The two fundamental assumptions of supervised learning
 - Prioritizing optimization efforts
 
+### 🎯 [Practical ML Decisions Guide](practical_ml_decisions_guide.md)
+- Quick-reference decision trees for common scenarios
+- Real-world examples and anti-patterns
+- Checklists for training and evaluation
+- When to ship criteria
+
 ## Workflow: Evaluating and Improving Models
 
 1. **Define Success** → Choose appropriate metrics
