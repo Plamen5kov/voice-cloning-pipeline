@@ -34,12 +34,39 @@ Strategies and techniques for evaluating machine learning models, designing prop
 - Identifying high-impact improvements
 - The two fundamental assumptions of supervised learning
 - Prioritizing optimization efforts
+- Cleaning incorrectly labeled data
+- Building first system quickly, then iterating
 
 ### 🎯 [Practical ML Decisions Guide](practical_ml_decisions_guide.md)
 - Quick-reference decision trees for common scenarios
 - Real-world examples and anti-patterns
 - Checklists for training and evaluation
 - When to ship criteria
+
+### 🔄 [Data Mismatch](data_mismatch.md)
+- Training and testing on different distributions
+- Bias and variance with mismatched data
+- Training-dev set for diagnosis
+- Addressing data mismatch systematically
+- Data synthesis techniques
+
+### 🚀 [Transfer Learning](transfer_learning.md)
+- Using pre-trained models effectively
+- Fine-tuning strategies for different data sizes
+- When transfer learning helps (and when it doesn't)
+- Implementation examples
+
+### 🎨 [Multi-Task Learning](multi_task_learning.md)
+- Training one model for multiple related tasks
+- Hard vs soft parameter sharing
+- Task weighting and sampling strategies
+- When multi-task beats single-task
+
+### 🔗 [End-to-End Learning](end_to_end_learning.md)
+- What is end-to-end deep learning
+- Pros and cons vs traditional pipelines
+- When to use end-to-end approaches
+- Hybrid approaches (best of both worlds)
 
 ## Workflow: Evaluating and Improving Models
 
